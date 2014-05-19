@@ -33,22 +33,29 @@
 	</modules>
 	
 	<properties>
-		<openMRSVersion>1.8.2</openMRSVersion>
+		<openMRSVersion>1.9.7</openMRSVersion>
+        <uiframeworkVersion>3.2</uiframeworkVersion>
+        <uicommonsVersion>1.3-SNAPSHOT</uicommonsVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-
+            <!-- Begin OpenMRS modules -->
             <dependency>
                 <groupId>org.openmrs.module</groupId>
                 <artifactId>uiframework-api</artifactId>
-                <version>2.0</version>
+                <version>${uiframeworkVersion}</version>
                 <type>jar</type>
                 <scope>provided</scope>
             </dependency>
-			
-			
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>uicommons-api</artifactId>
+                <version>${uicommonsVersion}</version>
+                <scope>provided</scope>
+            </dependency>
 
 			<!-- Begin OpenMRS core -->
 			
