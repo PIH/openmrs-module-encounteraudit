@@ -2,6 +2,7 @@
     ui.includeJavascript("encounteraudit", "jquery.js")
 
     def id = config.id
+    def start = config.start
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
 <script>
