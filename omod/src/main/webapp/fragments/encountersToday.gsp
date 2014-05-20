@@ -3,6 +3,7 @@
 
     def id = config.id
     def start = config.start
+    def end = config.end
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
 <script>
@@ -12,8 +13,8 @@
         jq('#${ id }_button').click(function() {
             jq.getJSON('${ ui.actionLink("getEncounters") }',
                     {
-                        'start': '${ ui.dateToString(start) }',
-                        'end': '${ ui.dateToString(end) }',
+                        'start': '${ start }',
+                        'end': '${ end }',
                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                     })
                     .success(function(data) {
