@@ -1,5 +1,5 @@
 <%
-    ui.includeJavascript("encounteraudit", "jquery.js")
+    ui.includeJavascript("encounteraudit", "jquery-1.8.3.min.js");
 
     def id = config.id
     def start = config.start
