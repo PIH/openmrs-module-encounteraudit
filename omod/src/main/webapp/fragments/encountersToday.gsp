@@ -6,6 +6,7 @@
     def end = config.end
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
+${ ui.resourceLinks() }
 <script>
     jq = jQuery;
 
