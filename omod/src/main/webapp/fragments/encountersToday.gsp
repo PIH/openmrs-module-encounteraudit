@@ -12,7 +12,7 @@ ${ ui.resourceLinks() }
 
     jq(function() {
         jq('#${ id }_button').click(function() {
-            jq.getJSON('${ ui.actionLink("getEncounters") }',
+            jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getEncounters") }',
                     {
                         'start': '${ start }',
                         'end': '${ end }',
@@ -64,3 +64,4 @@ ${ ui.resourceLinks() }
     <% } %>
     </tbody>
 </table>
+${ ui.resourceLinks() }
