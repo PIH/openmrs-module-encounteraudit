@@ -56,7 +56,7 @@ public class EncountersTodayFragmentController {
         if (endDate == null)
             endDate = defaultEndDate(startDate);
 
-        if (properties == null) {
+        if (properties == null || properties.length == 0) {
             properties = new String[] { "encounterType", "encounterDatetime", "location", "provider" };
         }
 

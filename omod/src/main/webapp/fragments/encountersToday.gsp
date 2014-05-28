@@ -1,12 +1,9 @@
 <%
-    ui.includeJavascript("encounteraudit", "jquery-1.8.3.min.js");
-
     def id = config.id
     def start = config.start
     def end = config.end
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
-${ ui.resourceLinks() }
 <script>
     jq = jQuery;
 
@@ -38,8 +35,8 @@ ${ ui.resourceLinks() }
     });
 </script>
 
-<input id="${ id }_button" type="button" value="Refresh"/>
-
+<input id="${ id }_button" type="button" value="Refresh Table"/>
+<br><br>
 <table id="${ id }">
     <thead>
     <tr>
