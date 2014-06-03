@@ -8,11 +8,20 @@
     jq = jQuery;
 
     jq(function() {
+
         jq('#${ id }_button').click(function() {
+            var encounterStartDate = jq("#startDateField-display").val();
+            var encounterEndDate = jq("#endDateField-display").val();
+            var jqStartDate = jq.datepicker.parseDate('dd-mm-yy', encounterStartDate);
+            var jqEndDate = jq.datepicker.parseDate('dd-mm-yy', encounterEndDate);
+            var jqFormatStartDate = jq.datepicker.formatDate('yy-mm-dd', jqStartDate);
+            var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
+
+
             jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getEncounters") }',
                     {
-                        'start': '${ start }',
-                        'end': '${ end }',
+                        'start': jqFormatStartDate,
+                        'end': jqFormatEndDate,
                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                     })
                     .success(function(data) {
@@ -35,6 +44,14 @@
     });
 </script>
 
+<p>
+${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'startDateField', label: 'Encounter Start Date', formFieldName: 'fromDate', "defaultDate": fromDate, useTime: false ]) }
+</p>
+<br>
+<p>
+${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'endDateField', label: 'Encounter End Date', formFieldName: 'toDate', "defaultDate": toDate, useTime: false ]) }
+</p>
+<br>
 <input id="${ id }_button" type="button" value="Refresh Table"/>
 <br><br>
 <table id="${ id }">

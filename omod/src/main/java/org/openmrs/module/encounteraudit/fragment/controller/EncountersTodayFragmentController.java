@@ -42,6 +42,9 @@ public class EncountersTodayFragmentController {
         if (endDate == null)
             endDate = defaultEndDate(startDate);
 
+        model.addAttribute("fromDate", startDate);
+        model.addAttribute("toDate", endDate);
+
         model.addAttribute("encounters", service.getEncounters(null, null, startDate, endDate, null, null, null, false));
     }
 

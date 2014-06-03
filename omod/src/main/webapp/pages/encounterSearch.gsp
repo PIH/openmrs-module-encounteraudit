@@ -3,8 +3,9 @@
 
     ui.includeCss("uicommons", "styleguide/index.css")
     ui.includeJavascript("uicommons", "jquery-1.8.3.min.js");
+    ui.includeJavascript("uicommons", "jquery-ui-1.9.2.custom.min.js");
     ui.includeJavascript("uicommons", "typeahead.js");
-    ui.includeJavascript("uicommons", "script.js");
+
 %>
 
 <br><br>
@@ -40,8 +41,8 @@
         </article>
         <h1>Encounter Data</h1>
             ${ ui.includeFragment("encounteraudit", "encountersToday",
-                [   start: "2011-02-16",
-                    end: "2011-02-16 23:59:59.999",
+                [   start: "2013-02-16",
+                    end: "2013-03-16 23:59:59.999",
                     properties: ["location", "encounterDatetime", "location"]
             ]) }
     </div>
