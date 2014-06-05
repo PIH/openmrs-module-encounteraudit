@@ -1,5 +1,6 @@
 package org.openmrs.module.encounteraudit.fragment.controller;
 
+import ca.uhn.hl7v2.model.v23.segment.LOC;
 import org.openmrs.Encounter;
 import org.openmrs.api.EncounterService;
 import org.openmrs.ui.framework.SimpleObject;
@@ -8,8 +9,11 @@ import org.openmrs.ui.framework.annotation.FragmentParam;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.util.logging.resources.logging_zh_CN;
 
+import javax.xml.stream.Location;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class EncountersTodayFragmentController {
     public void controller(FragmentModel model,
                            @SpringBean("encounterService") EncounterService service,
                            @FragmentParam(value="start", required=false) Date startDate,
+                           @FragmentParam(value="location", required=false) org.openmrs.Location Location,
                            @FragmentParam(value="end", required=false) Date endDate) {
 
         if (startDate == null)
@@ -44,12 +49,14 @@ public class EncountersTodayFragmentController {
 
         model.addAttribute("fromDate", startDate);
         model.addAttribute("toDate", endDate);
+        model.addAttribute("loc", Location);
 
-        model.addAttribute("encounters", service.getEncounters(null, null, startDate, endDate, null, null, null, false));
+        model.addAttribute("encounters", service.getEncounters(null, (org.openmrs.Location) Location, startDate, endDate, null, null, null, false));
     }
 
     public List<SimpleObject> getEncounters(@RequestParam(value="start", required=false) Date startDate,
                                             @RequestParam(value="end", required=false) Date endDate,
+                                            @RequestParam(value="location", required=false) org.openmrs.Location Location,
                                             @RequestParam(value="properties", required=false) String[] properties,
                                             @SpringBean("encounterService") EncounterService service,
                                             UiUtils ui) {
@@ -63,7 +70,7 @@ public class EncountersTodayFragmentController {
             properties = new String[] { "encounterType", "encounterDatetime", "location", "provider" };
         }
 
-        List<Encounter> encs = service.getEncounters(null, null, startDate, endDate, null, null, null, false);
+        List<Encounter> encs = service.getEncounters(null, Location, startDate, endDate, null, null, null, false);
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 

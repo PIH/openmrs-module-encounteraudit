@@ -2,6 +2,7 @@
     def id = config.id
     def start = config.start
     def end = config.end
+    def location = config.location
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
 <script>
@@ -16,12 +17,14 @@
             var jqEndDate = jq.datepicker.parseDate('dd-mm-yy', encounterEndDate);
             var jqFormatStartDate = jq.datepicker.formatDate('yy-mm-dd', jqStartDate);
             var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
+            var encounterLocation = jq("#location").val();
 
 
             jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getEncounters") }',
                     {
                         'start': jqFormatStartDate,
                         'end': jqFormatEndDate,
+                        'location' : encounterLocation,
                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                     })
                     .success(function(data) {

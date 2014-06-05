@@ -36,6 +36,17 @@
                  Encounter Type
                  <input id="typeahead" data-provide="typeahead" placeholder="Auto Suggest" type="text"></input>
                  ${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'datetime', label: 'Encounter Date', formFieldName: 'date picker', useTime: false ]) }
+                  <p>Encounter type:
+                    <select id="location">
+                        <option value="2">Neno District Hospital</option>
+                        <option value="5">Matandani Health Center</option>
+                        <option value="17">Luwani Health Center</option>
+                        <option value="20">Nsambe Health Center</option>
+                        <option value="4">Neno Parish Health Center</option>
+                        <option value="3">Magaleta Health Center</option>
+                        <option value="34">Ligowe Health Center</option>
+                    </select>
+                 </p>
                  </p>
             </form>
         </article>
@@ -43,6 +54,7 @@
             ${ ui.includeFragment("encounteraudit", "encountersToday",
                 [   start: "2013-02-16",
                     end: "2013-03-16 23:59:59.999",
+                    location: "2",
                     properties: ["location", "encounterDatetime", "location"]
             ]) }
     </div>
