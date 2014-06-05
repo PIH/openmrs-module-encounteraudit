@@ -3,6 +3,7 @@
     def start = config.start
     def end = config.end
     def location = config.location
+    def encountertype = config.encountertype
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
 <script>
