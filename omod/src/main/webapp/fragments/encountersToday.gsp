@@ -18,7 +18,7 @@
             var jqEndDate = jq.datepicker.parseDate('dd-mm-yy', encounterEndDate);
             var jqFormatStartDate = jq.datepicker.formatDate('yy-mm-dd', jqStartDate);
             var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
-            var encounterLocation = jq("#location").val();
+            var encounterLocation = jq("#encounters-filterByLocation-field").val();
 
 
             jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getEncounters") }',
@@ -49,11 +49,19 @@
 </script>
 
 <p>
-${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'startDateField', label: 'Encounter Start Date', formFieldName: 'fromDate', "defaultDate": fromDate, useTime: false ]) }
+    ${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'startDateField', label: 'Encounter Start Date', formFieldName: 'fromDate', "defaultDate": fromDate, useTime: false ]) }
 </p>
 <br>
 <p>
-${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'endDateField', label: 'Encounter End Date', formFieldName: 'toDate', "defaultDate": toDate, useTime: false ]) }
+    ${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'endDateField', label: 'Encounter End Date', formFieldName: 'toDate', "defaultDate": toDate, useTime: false ]) }
+</p>
+<br>
+<p>
+    ${ ui.includeFragment("uicommons", "field/location", [
+            "id": "encounters-filterByLocation",
+            "formFieldName": "filterByLocationId",
+            "label": "encounteraudit.filterByLocation"
+    ] ) }
 </p>
 <br>
 <input id="${ id }_button" type="button" value="Refresh Table"/>
@@ -68,17 +76,17 @@ ${ ui.includeFragment("uicommons", "field/datetimepicker", [ id: 'endDateField',
     </thead>
     <tbody>
     <% if (encounters) { %>
-    <% encounters.each { enc -> %>
-    <tr>
-        <% props.each { prop -> %>
-        <td><%= ui.format(enc."${prop}") %></td>
+        <% encounters.each { enc -> %>
+        <tr>
+            <% props.each { prop -> %>
+            <td><%= ui.format(enc."${prop}") %></td>
+            <% } %>
+        </tr>
         <% } %>
-    </tr>
-    <% } %>
     <% } else { %>
-    <tr>
-        <td colspan="4">${ ui.message("general.none") }</td>
-    </tr>
+        <tr>
+            <td colspan="4">${ ui.message("general.none") }</td>
+        </tr>
     <% } %>
     </tbody>
 </table>

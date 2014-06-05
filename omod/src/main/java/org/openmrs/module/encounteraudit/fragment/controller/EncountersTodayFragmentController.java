@@ -1,8 +1,9 @@
 package org.openmrs.module.encounteraudit.fragment.controller;
 
-import ca.uhn.hl7v2.model.v23.segment.LOC;
+
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
+import org.openmrs.Location;
 import org.openmrs.api.EncounterService;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
@@ -10,9 +11,7 @@ import org.openmrs.ui.framework.annotation.FragmentParam;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.util.logging.resources.logging_zh_CN;
 
-import javax.xml.stream.Location;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -59,7 +58,7 @@ public class EncountersTodayFragmentController {
 
     public List<SimpleObject> getEncounters(@RequestParam(value="start", required=false) Date startDate,
                                             @RequestParam(value="end", required=false) Date endDate,
-                                            @RequestParam(value="location", required=false) org.openmrs.Location Location,
+                                            @RequestParam(value="location", required=false) Location location,
                                             @RequestParam(value="encountertype", required=false) Collection<EncounterType> encounterType,
                                             @RequestParam(value="properties", required=false) String[] properties,
                                             @SpringBean("encounterService") EncounterService service,
@@ -73,7 +72,7 @@ public class EncountersTodayFragmentController {
             properties = new String[] { "encounterType", "encounterDatetime", "location", "provider" };
         }
 
-        List<Encounter> encs = service.getEncounters(null, Location, startDate, endDate, null, encounterType, null, false);
+        List<Encounter> encs = service.getEncounters(null, location, startDate, endDate, null, encounterType, null, false);
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 
