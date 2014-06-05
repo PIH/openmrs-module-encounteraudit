@@ -12,10 +12,7 @@ import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class EncountersTodayFragmentController {
 
@@ -59,7 +56,7 @@ public class EncountersTodayFragmentController {
     public List<SimpleObject> getEncounters(@RequestParam(value="start", required=false) Date startDate,
                                             @RequestParam(value="end", required=false) Date endDate,
                                             @RequestParam(value="location", required=false) Location location,
-                                            @RequestParam(value="encountertype", required=false) Collection<EncounterType> encounterType,
+                                            @RequestParam(value="encountertype", required=false) EncounterType encounterType,
                                             @RequestParam(value="properties", required=false) String[] properties,
                                             @SpringBean("encounterService") EncounterService service,
                                             UiUtils ui) {
@@ -71,8 +68,13 @@ public class EncountersTodayFragmentController {
         if (properties == null || properties.length == 0) {
             properties = new String[] { "encounterType", "encounterDatetime", "location", "provider" };
         }
+        List<EncounterType> encounterTypes = null;
+        if (encounterType != null) {
+            encounterTypes = (new ArrayList<EncounterType>(Collections.singletonList(encounterType)));
+        }
 
-        List<Encounter> encs = service.getEncounters(null, location, startDate, endDate, null, encounterType, null, false);
+
+        List<Encounter> encs = service.getEncounters(null, location, startDate, endDate, null, encounterTypes, null, false);
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 

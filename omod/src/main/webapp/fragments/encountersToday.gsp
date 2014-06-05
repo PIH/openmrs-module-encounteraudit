@@ -19,13 +19,14 @@
             var jqFormatStartDate = jq.datepicker.formatDate('yy-mm-dd', jqStartDate);
             var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
             var encounterLocation = jq("#encounters-filterByLocation-field").val();
-
+            var encounterType = jq("#filterByEncounterType-field").val();
 
             jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getEncounters") }',
                     {
                         'start': jqFormatStartDate,
                         'end': jqFormatEndDate,
                         'location' : encounterLocation,
+                        'encountertype' :encounterType,
                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                     })
                     .success(function(data) {
@@ -61,6 +62,15 @@
             "id": "encounters-filterByLocation",
             "formFieldName": "filterByLocationId",
             "label": "encounteraudit.filterByLocation"
+    ] ) }
+</p>
+
+<br>
+<p>
+    ${ ui.includeFragment("uicommons", "field/encounterType", [
+            "id": "filterByEncounterType",
+            "formFieldName": "filterByEncounterType",
+            "label": "encounteraudit.filterByEncounterType"
     ] ) }
 </p>
 <br>
