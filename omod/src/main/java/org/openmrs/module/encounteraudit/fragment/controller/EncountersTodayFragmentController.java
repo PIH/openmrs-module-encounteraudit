@@ -5,6 +5,7 @@ import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
 import org.openmrs.api.EncounterService;
+import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.FragmentParam;
@@ -78,4 +79,28 @@ public class EncountersTodayFragmentController {
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 
+    public List<SimpleObject> getAuditEncounters(@RequestParam(value="start", required=false) Date startDate,
+                                            @RequestParam(value="end", required=false) Date endDate,
+                                            @RequestParam(value="location", required=false) Location location,
+                                            @RequestParam(value="encountertype", required=false) EncounterType encounterType,
+                                            @RequestParam(value="properties", required=false) String[] properties,
+                                            @SpringBean("encounterAuditService") EncounterAuditService service,
+                                            UiUtils ui) {
+
+        if (startDate == null)
+            startDate = defaultStartDate();
+        if (endDate == null)
+            endDate = defaultEndDate(startDate);
+        if (properties == null || properties.length == 0) {
+            properties = new String[] { "encounterType", "encounterDatetime", "location", "provider" };
+        }
+        List<EncounterType> encounterTypes = null;
+        if (encounterType != null) {
+            encounterTypes = (new ArrayList<EncounterType>(Collections.singletonList(encounterType)));
+        }
+
+
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 30);
+        return SimpleObject.fromCollection(encs, ui, properties);
+    }
 }

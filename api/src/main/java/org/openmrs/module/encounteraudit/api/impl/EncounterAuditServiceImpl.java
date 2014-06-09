@@ -13,11 +13,15 @@
  */
 package org.openmrs.module.encounteraudit.api.impl;
 
+import org.openmrs.Encounter;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * It is a default implementation of {@link EncounterAuditService}.
@@ -40,5 +44,10 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
      */
     public EncounterAuditDAO getDao() {
 	    return dao;
+    }
+
+    @Override
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize) {
+        return dao.getAuditEncounters(fromDate, toDate, 30);
     }
 }

@@ -21,7 +21,7 @@
             var encounterLocation = jq("#encounters-filterByLocation-field").val();
             var encounterType = jq("#filterByEncounterType-field").val();
 
-            jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getEncounters") }',
+            jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getAuditEncounters") }',
                     {
                         'start': jqFormatStartDate,
                         'end': jqFormatEndDate,

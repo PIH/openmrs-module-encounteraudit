@@ -13,8 +13,12 @@
  */
 package org.openmrs.module.encounteraudit.api;
 
+import org.openmrs.Encounter;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
@@ -33,4 +37,5 @@ public interface EncounterAuditService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize);
 }
