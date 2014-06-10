@@ -4,6 +4,7 @@
     def end = config.end
     def location = config.location
     def encountertype = config.encountertype
+    def numofrecords = config.numofrecords
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
 <script>
@@ -20,6 +21,7 @@
             var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
             var encounterLocation = jq("#encounters-filterByLocation-field").val();
             var encounterType = jq("#filterByEncounterType-field").val();
+            var numofrecords = jq("#numofrecords").val();
 
             jq.getJSON('${ ui.actionLink("encounteraudit","encountersToday","getAuditEncounters") }',
                     {
@@ -27,6 +29,7 @@
                         'end': jqFormatEndDate,
                         'location' : encounterLocation,
                         'encountertype' :encounterType,
+                        'numofrecords' :numofrecords,
                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                     })
                     .success(function(data) {
@@ -72,6 +75,11 @@
             "formFieldName": "filterByEncounterType",
             "label": "encounteraudit.filterByEncounterType"
     ] ) }
+</p>
+<br>
+<p>
+<label>Number of Records</label> <input id="numofrecords" name="Samples" size="4">
+</select>
 </p>
 <br>
 <input id="${ id }_button" type="button" value="Refresh Table"/>

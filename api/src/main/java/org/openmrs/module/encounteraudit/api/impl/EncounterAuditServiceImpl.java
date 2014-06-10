@@ -14,6 +14,7 @@
 package org.openmrs.module.encounteraudit.api.impl;
 
 import org.openmrs.Encounter;
+import org.openmrs.EncounterType;
 import org.openmrs.Location;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
@@ -48,7 +49,7 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
     }
 
     @Override
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location) {
-        return dao.getAuditEncounters(fromDate, toDate, 30, location);
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType) {
+        return dao.getAuditEncounters(fromDate, toDate, sampleSize, location, encounterType);
     }
 }
