@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.openmrs.Encounter;
+import org.openmrs.Location;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
 
 import java.util.Date;
@@ -46,7 +47,7 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
     }
 
     @Override
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, int locationId) {
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location) {
 
         if (sampleSize < 1) {
             // by default return 25 records
@@ -55,14 +56,18 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
 
         StringBuilder sql = new StringBuilder("select * from encounter e where ");
         sql.append(" encounter_datetime > :fromDate and ");
-        sql.append(" encounter_datetime < :toDate and ");
-        sql.append(" location_id = :locationId ");
+        sql.append(" encounter_datetime < :toDate ");
+        if (location != null) {
+            sql.append(" and location_id = :locationId ");
+        }
         sql.append("limit 0,:sampleSize");
 
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql.toString()).addEntity(Encounter.class);
         query.setDate("fromDate", fromDate);
         query.setDate("toDate", toDate);
-        query.setInteger("locationId", new Integer(locationId));
+        if (location != null) {
+            query.setInteger("locationId", new Integer(location.getLocationId()));
+        }
         query.setInteger("sampleSize", new Integer(sampleSize));
 
         List<Encounter> encounterList = query.list();

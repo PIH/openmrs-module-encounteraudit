@@ -14,6 +14,7 @@
 package org.openmrs.module.encounteraudit.api.db;
 
 import org.openmrs.Encounter;
+import org.openmrs.Location;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 
 import java.util.Date;
@@ -27,5 +28,5 @@ public interface EncounterAuditDAO {
 	/*
 	 * Add DAO methods here
 	 */
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, int locationId);
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location);
 }
