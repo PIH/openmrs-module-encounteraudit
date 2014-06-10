@@ -59,7 +59,7 @@ public class EncountersTodayFragmentController {
                                             @RequestParam(value="location", required=false) Location location,
                                             @RequestParam(value="encountertype", required=false) EncounterType encounterType,
                                             @RequestParam(value="properties", required=false) String[] properties,
-                                            @SpringBean("encounterService") EncounterService service,
+                                            @SpringBean("encounterAuditService") EncounterAuditService service,
                                             UiUtils ui) {
 
         if (startDate == null)
@@ -75,7 +75,7 @@ public class EncountersTodayFragmentController {
         }
 
 
-        List<Encounter> encs = service.getEncounters(null, location, startDate, endDate, null, encounterTypes, null, false);
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 25);
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 
@@ -100,7 +100,7 @@ public class EncountersTodayFragmentController {
         }
 
 
-        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 30);
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 25);
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 }
