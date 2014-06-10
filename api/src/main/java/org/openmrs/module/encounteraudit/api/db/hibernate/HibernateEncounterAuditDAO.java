@@ -55,8 +55,8 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
 
         StringBuilder sql = new StringBuilder("select * from encounter e where ");
         sql.append(" encounter_datetime > :fromDate and ");
-        sql.append(" location_id = :locationId and ");
-        sql.append(" encounter_datetime < :toDate ");
+        sql.append(" encounter_datetime < :toDate and ");
+        sql.append(" location_id = :locationId ");
         sql.append("limit 0,:sampleSize");
 
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql.toString()).addEntity(Encounter.class);
