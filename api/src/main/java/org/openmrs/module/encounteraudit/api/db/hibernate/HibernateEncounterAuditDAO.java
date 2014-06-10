@@ -46,20 +46,23 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
     }
 
     @Override
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize) {
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, int locationId) {
 
         if (sampleSize < 1) {
             // by default return 25 records
             sampleSize = 25;
         }
+
         StringBuilder sql = new StringBuilder("select * from encounter e where ");
         sql.append(" encounter_datetime > :fromDate and ");
+        sql.append(" location_id = :locationId and ");
         sql.append(" encounter_datetime < :toDate ");
         sql.append("limit 0,:sampleSize");
 
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql.toString()).addEntity(Encounter.class);
         query.setDate("fromDate", fromDate);
         query.setDate("toDate", toDate);
+        query.setInteger("locationId", new Integer(locationId));
         query.setInteger("sampleSize", new Integer(sampleSize));
 
         List<Encounter> encounterList = query.list();

@@ -27,5 +27,5 @@ public interface EncounterAuditDAO {
 	/*
 	 * Add DAO methods here
 	 */
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize);
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, int locationId);
 }

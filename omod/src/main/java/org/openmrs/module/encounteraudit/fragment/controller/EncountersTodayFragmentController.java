@@ -75,7 +75,7 @@ public class EncountersTodayFragmentController {
         }
 
 
-        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 25);
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 25, location.getLocationId());
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 
@@ -100,7 +100,7 @@ public class EncountersTodayFragmentController {
         }
 
 
-        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 25);
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, 25, location.getLocationId());
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 }
