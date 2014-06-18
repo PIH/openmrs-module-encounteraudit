@@ -78,7 +78,7 @@
                                                 var item = data[index];
                                                 var row = '<tr>';
                                                 <% props.each { %>
-                                                row += '<td> <a href=\"http://www.google.com\">' + item.${ it } + '</a></td>';
+                                                row += '<td> <a href=\"' + 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?encounterId=' + item.encounterId  + '\"google\">' + item.${ it } + '</a></td>';
                                                 <% } %>
                                                 row += '</tr>';
                                                 tbody.append(row);
