@@ -4,6 +4,7 @@ package org.openmrs.module.encounteraudit.fragment.controller;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.Person;
 import org.openmrs.api.EncounterService;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.ui.framework.SimpleObject;
@@ -96,9 +97,9 @@ public class EncounterAuditFragmentController {
         if (endDate == null)
             endDate = defaultEndDate(startDate);
         if (numOfRecords == null)
-            numOfRecords =  2;
+            numOfRecords =  25;
         if (properties == null || properties.length == 0) {
-            properties = new String[] { "encounterType", "encounterDatetime", "location", "provider" };
+            properties = new String[] { "encounterId", "patient", "encounterType", "encounterDatetime", "location", "provider", "creator"};
         }
         List<EncounterType> encounterTypes = null;
         if (encounterType != null) {

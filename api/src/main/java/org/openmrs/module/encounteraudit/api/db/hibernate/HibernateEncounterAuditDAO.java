@@ -65,8 +65,8 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
         if (encounterType != null) {
             sql.append(" and encounter_type = :encounterType ");
         }
+        sql.append(" order by rand() ");
         sql.append("limit 0,:sampleSize ");
-        // sql.append("order by rand()");
 
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql.toString()).addEntity(Encounter.class);
         query.setDate("fromDate", fromDate);

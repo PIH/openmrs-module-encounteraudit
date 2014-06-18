@@ -35,7 +35,7 @@
                             end: "2013-03-16 23:59:59.999",
                             location: "2",
                             encountertype: "9",
-                            properties: ["encounterDatetime", "location", "encounterType", "creator"]
+                            properties: ["encounterId","patient","encounterDatetime", "location", "encounterType", "creator"]
                     ]) %>
     </div>
 </div>
