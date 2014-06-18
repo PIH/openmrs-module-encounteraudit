@@ -38,8 +38,8 @@
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
 				
-		EncounterAudit.hbm.xml
-				
+		EncounterAuditParameter.hbm.xml
+        EncounterAuditProject.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->
