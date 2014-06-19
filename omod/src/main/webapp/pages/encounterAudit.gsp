@@ -5,6 +5,7 @@
     ui.includeJavascript("uicommons", "jquery-ui-1.9.2.custom.min.js");
     ui.includeCss("uicommons", "styleguide/jquery-ui-1.9.2.custom.min.css")
     ui.includeJavascript("uicommons", "typeahead.js");
+    ui.includeJavascript("encounteraudit", "encounterChart.js");
 %>
 
 <br><br>
