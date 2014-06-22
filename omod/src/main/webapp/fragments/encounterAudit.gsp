@@ -77,11 +77,37 @@
                                         var tbody = jq('#${ id } > tbody');
                                         for (index in data) {
                                             var item = data[index];
-                                            var row = '<tr>';
+                                                var row = jq(document.createElement('tr'));
+                                                row.mouseover(function(){
+                                                    jq(this).addClass('highlighted');
+                                                });
+                                                row.mouseout(function(){
+                                                    jq(this).removeClass('highlighted');
+                                                });
+                                                if (index % 2 == 0) {
+                                                    row.addClass('evenRow');
+                                                } else {
+                                                    row.addClass('oddRow');
+                                                }
+                                                var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&encounterId='  + item.encounterId;
+                                                row.click(function() {
+                                                    jq("#encounterDialog").attr('src', encounterFormUrl);
+                                                    jq("#encounterFormDiv").dialog({
+                                                        width: 1200,
+                                                        height: 600,
+                                                        modal: true,
+                                                        close: function () {
+                                                            jq("#encounterDialog").attr('src', "about:blank");
+                                                        }
+                                                    });
+                                                    return false;
+                                                });
                                             <% props.each { %>
-                                            row += '<td><a href=\"' + 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?encounterId=' + item.encounterId  + '&inPopup=true\" class=\"epop\">' + item.${ it } + '</a></td>';
+                                                    var column = jq(document.createElement('td'));
+                                                    column.append(item.${ it });
+                                                    row.append(column);
                                             <% } %>
-                                            row += '</tr>';
+
                                             tbody.append(row);
                                         }
                                     })
@@ -164,6 +190,9 @@
         <br>
     </p>
     <br>
+        <div id="encounterFormDiv" title="Encounter" style="display:none;">
+            <iframe id="encounterDialog" width="1200" height="600"></iframe>
+        </div>
     <table id="${ id }">
         <thead>
         <tr>
