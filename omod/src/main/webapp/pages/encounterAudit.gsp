@@ -5,7 +5,6 @@
     ui.includeJavascript("uicommons", "jquery-ui-1.9.2.custom.min.js");
     ui.includeCss("uicommons", "styleguide/jquery-ui-1.9.2.custom.min.css")
     ui.includeJavascript("uicommons", "typeahead.js");
-    ui.includeJavascript("encounteraudit", "encounterChart.js");
 %>
 
 <br><br>
@@ -36,7 +35,7 @@
                             end: "2013-03-16 23:59:59.999",
                             location: "2",
                             encountertype: "9",
-                            properties: ["encounterId","patient","encounterDatetime", "location", "encounterType", "creator"]
+                            properties: ["encounterId","patientId","encounterDatetime", "location", "encounterType", "creator"]
                     ]) %>
     </div>
 </div>
