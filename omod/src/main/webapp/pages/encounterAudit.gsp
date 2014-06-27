@@ -9,7 +9,7 @@
 
 <style type="text/css">
 .ex_highlight {
-    color: red;
+    background: yellow !important;
     padding: 5px;
     margin: 5px
 }

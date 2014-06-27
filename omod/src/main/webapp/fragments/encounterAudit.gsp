@@ -81,14 +81,14 @@
 
                                                 var row = jq(document.createElement('tr'));
                                                 row.mouseover(function(){
-                                                    jq(this).addClass('highlighted');
-                                                    jq(this).css("color","red");
+                                                    jq(this).addClass('ex_highlight');
+                                                    // jq(this).css("color","red");
                                                     jq(this).css("text-decoration","underline");
                                                     jq(this).css( 'cursor', 'pointer' );
                                                 });
                                                 row.mouseout(function(){
-                                                    jq(this).removeClass('highlighted');
-                                                    jq(this).css("color","black");
+                                                    jq(this).removeClass('ex_highlight');
+                                                    // jq(this).css("color","black");
                                                     jq(this).css("text-decoration","none");
                                                 });
                                                 if (index % 2 == 0) {
