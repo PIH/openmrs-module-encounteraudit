@@ -7,6 +7,14 @@
     ui.includeJavascript("uicommons", "typeahead.js");
 %>
 
+<style type="text/css">
+.ex_highlight {
+    color: red;
+    padding: 5px;
+    margin: 5px
+}
+</style>
+
 <br><br>
 <script>
     var jq = jQuery;
