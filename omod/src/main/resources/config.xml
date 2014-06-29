@@ -40,6 +40,7 @@
 				
 		EncounterAuditParameter.hbm.xml
         EncounterAuditProject.hbm.xml
+        EncounterAuditEncounter.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->

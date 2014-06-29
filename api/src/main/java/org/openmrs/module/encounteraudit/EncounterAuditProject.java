@@ -29,7 +29,7 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
 
     @Override
     public Integer getId() {
-        return null;
+        return id;
     }
 
     @Override
