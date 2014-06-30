@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.encounteraudit">
+
+    <class name="EncounterAuditObs" table="${project.parent.artifactId}_project">
+        <id name="id" type="int" column="id" unsaved-value="0">
+            <generator class="native" />
+        </id>
+
+        <many-to-one name="encounterAuditEncounter" class="org.openmrs.module.encounteraudit.EncounterAuditEncounter" not-null="true" />
+        <many-to-one name="obs" class="org.openmrs.Obs" not-null="true" />
+
+
+        <property name="originalValue" type="java.lang.String" column="original_value" length="45" unique="true" />
+        <property name="auditValue" type="java.lang.String" column="audit_value" length="45" unique="true" />
+
+        <property name="obsAuditStatus" column="obs_status" length="45" not-null="true">
+            <type name="org.openmrs.util.HibernateEnumType">
+                <param name="enumClassName">org.openmrs.module.encounteraudit.EncounterAuditProject$EncounterAuditProjectStatus</param>
+            </type>
+        </property>
+
+        <property name="obsAuditCodeType" column="obs_audit_code" length="45" not-null="true">
+            <type name="org.openmrs.util.HibernateEnumType">
+                <param name="enumClassName">org.openmrs.module.encounteraudit.EncounterAuditEncounter$EncounterAuditCodeType</param>
+            </type>
+        </property>
+
+        <many-to-one name="auditor" class="org.openmrs.User" not-null="true" />
+
+        <property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
+        <property name="dateCreated" type="java.util.Date" column="date_created" not-null="true" length="19" />
+        <property name="dateChanged" type="java.util.Date" column="date_changed" length="19"/>
+        <property name="dateVoided" type="java.util.Date" column="date_voided" length="19" />
+
+        <property name="voided" type="boolean" length="1" not-null="true" />
+        <property name="voidReason" type="java.lang.String" column="void_reason" length="255" />
+
+        <many-to-one name="creator" class="org.openmrs.User" not-null="true" />
+        <many-to-one name="changedBy" class="org.openmrs.User" column="changed_by"/>
+        <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" />
+
+    </class>
+
+
+</hibernate-mapping>
