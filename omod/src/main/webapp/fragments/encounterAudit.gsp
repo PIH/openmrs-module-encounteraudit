@@ -82,8 +82,6 @@
                                                 var row = jq(document.createElement('tr'));
                                                 row.mouseover(function(){
                                                     jq(this).addClass('ex_highlight');
-                                                    // jq(this).css("color","red");
-                                                    jq(this).css("text-decoration","underline");
                                                     jq(this).css( 'cursor', 'pointer' );
                                                 });
                                                 row.mouseout(function(){
@@ -117,6 +115,14 @@
 
                                             tbody.append(row);
                                         }
+                                        // Table sorter - function
+                                        jq(document).ready(function() {
+                                            jq('table').tablesorter();
+                                        });
+                                        // Table sorter - label for css
+                                        jq(document).ready(function() {
+                                            jq('table:nth-child(5)').addClass('tablesorter');
+                                        });
                                     })
                                     .error(function(xhr, status, err) {
                                         alert('AJAX error ' + err);
@@ -243,7 +249,7 @@
             <td>
                 <h2>Quick Reports</h2>
                 <center>
-                <img src="http://atmos.uw.edu/~pochedls/nobackup/deleteme/report_example.png">
+                <!-- <img src="http://atmos.uw.edu/~pochedls/nobackup/deleteme/report_example.png"> -->
                 </center>
             </td>
         </tr>
