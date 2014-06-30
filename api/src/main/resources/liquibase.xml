@@ -86,4 +86,145 @@
 
     </changeSet>
 
+    <changeSet id="201406290650-1" author="cioan">
+        <comment>Adds encounteraudit_encounter table</comment>
+        <createTable tableName="encounteraudit_encounter">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="project_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="encounter_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="encounter_status" type="varchar(45)">
+            </column>
+
+            <column name="encounter_audit_code" type="varchar(45)">
+            </column>
+
+            <column name="auditor" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="changed_by" type="int" />
+            <column name="date_changed" type="datetime" />
+            <column name="voided" type="tinyint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="int" />
+            <column name="date_voided" type="datetime" />
+            <column name="void_reason" type="varchar(255)" defaultValue="null"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_encounter_project_id"
+                                 baseTableName="encounteraudit_encounter" baseColumnNames="project_id"
+                                 referencedTableName="encounteraudit_project" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_encounter_encounter_id"
+                                 baseTableName="encounteraudit_encounter" baseColumnNames="encounter_id"
+                                 referencedTableName="encounter" referencedColumnNames="encounter_id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_encounter_auditor"
+                                 baseTableName="encounteraudit_encounter" baseColumnNames="auditor"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_encounter_changed_by"
+                                 baseTableName="encounteraudit_encounter" baseColumnNames="changed_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_encounter_voided_by"
+                                 baseTableName="encounteraudit_encounter" baseColumnNames="voided_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+
+    </changeSet>
+
+    <changeSet id="201406290750-1" author="cioan">
+        <comment>Adds encounteraudit_obs table</comment>
+        <createTable tableName="encounteraudit_obs">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="encounteraudit_encounter_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="obs_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="original_value" type="varchar(45)">
+            </column>
+
+            <column name="audit_value" type="varchar(45)">
+            </column>
+
+            <column name="obs_status" type="varchar(45)">
+            </column>
+
+            <column name="obs_audit_code" type="varchar(45)">
+            </column>
+
+            <column name="auditor" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="changed_by" type="int" />
+            <column name="date_changed" type="datetime" />
+            <column name="voided" type="tinyint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="int" />
+            <column name="date_voided" type="datetime" />
+            <column name="void_reason" type="varchar(255)" defaultValue="null"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_obs_encounter_id"
+                                 baseTableName="encounteraudit_obs" baseColumnNames="encounteraudit_encounter_id"
+                                 referencedTableName="encounteraudit_encounter" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_obs_id"
+                                 baseTableName="encounteraudit_obs" baseColumnNames="obs_id"
+                                 referencedTableName="obs" referencedColumnNames="obs_id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_obs_auditor"
+                                 baseTableName="encounteraudit_obs" baseColumnNames="auditor"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_obs_changed_by"
+                                 baseTableName="encounteraudit_obs" baseColumnNames="changed_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+
+        <addForeignKeyConstraint constraintName="encounteraudit_obs_voided_by"
+                                 baseTableName="encounteraudit_obs" baseColumnNames="voided_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+
+    </changeSet>
+
+
 </databaseChangeLog>
