@@ -112,7 +112,11 @@
                                                     column.append(item.${ it });
                                                     row.append(column);
                                             <% } %>
-
+                                            var myObs = item.obs;
+                                            for (i = 0; i < myObs.length; i++) {
+                                                var tempObs = myObs[i];
+                                                console.log("tempObs.id = " + tempObs.id);
+                                            }
                                             tbody.append(row);
                                         }
                                         // Table sorter - function

@@ -1,10 +1,7 @@
 package org.openmrs.module.encounteraudit.fragment.controller;
 
 
-import org.openmrs.Encounter;
-import org.openmrs.EncounterType;
-import org.openmrs.Location;
-import org.openmrs.Person;
+import org.openmrs.*;
 import org.openmrs.api.EncounterService;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.ui.framework.SimpleObject;
@@ -108,6 +105,24 @@ public class EncounterAuditFragmentController {
 
 
         List<Encounter> encs = service.getAuditEncounters(startDate, endDate, numOfRecords, location, encounterType);
-        return SimpleObject.fromCollection(encs, ui, properties);
+        return simplify(ui, encs, properties);
     }
+
+    List<SimpleObject> simplify(UiUtils ui,  List<Encounter> results, String[] properties) {
+        List<SimpleObject> encounters = new ArrayList<SimpleObject>(results.size());
+        for (Encounter encounter : results) {
+            encounters.add(simplify(ui, encounter, properties));
+        }
+        return encounters;
+    }
+
+    SimpleObject simplify(UiUtils ui, Encounter encounter, String[] properties) {
+        Set<Obs> obs = encounter.getObs();
+
+        SimpleObject o = SimpleObject.fromObject(encounter, ui, properties);
+        o.put("obs", SimpleObject.fromCollection(obs, ui, "id"));
+
+        return o;
+    }
+
 }
