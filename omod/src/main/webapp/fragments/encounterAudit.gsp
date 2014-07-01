@@ -117,11 +117,11 @@
                                         }
                                         // Table sorter - function
                                         jq(document).ready(function() {
-                                            jq('table').tablesorter();
+                                            jq('#${ id }').tablesorter();
                                         });
                                         // Table sorter - label for css
                                         jq(document).ready(function() {
-                                            jq('table:nth-child(5)').addClass('tablesorter');
+                                            jq('#${ id }').addClass('tablesorter');
                                         });
                                     })
                                     .error(function(xhr, status, err) {

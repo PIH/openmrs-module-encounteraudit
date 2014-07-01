@@ -1,10 +1,9 @@
 <%
     ui.decorateWith("uicommons", "html5")
     ui.includeCss("uicommons", "styleguide/index.css")
+    ui.includeJavascript("uicommons", "jquery-1.8.3.min.js");
     ui.includeJavascript("uicommons", "jquery-ui-1.9.2.custom.min.js");
     ui.includeCss("uicommons", "styleguide/jquery-ui-1.9.2.custom.min.css")
-    ui.includeJavascript("uicommons", "typeahead.js");
-    ui.includeJavascript("uicommons", "jquery-1.8.3.min.js");
     ui.includeJavascript("encounteraudit", "jquery.tablesorter.min.js");
     ui.includeCss("encounteraudit", "tablesorter/style.css")
 %>
