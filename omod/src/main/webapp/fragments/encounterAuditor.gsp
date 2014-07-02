@@ -64,7 +64,7 @@
                             var encounterType = jq("#filterByEncounterType-field").val();
                             var numofrecords = jq("#numofrecords").val();
 
-                            jq.getJSON('${ ui.actionLink("encounteraudit","encounterAudit","getAuditEncounters") }',
+                            jq.getJSON('${ ui.actionLink("encounteraudit","encounterAuditor","getAuditEncounters") }',
                                     {
                                         'start': jqFormatStartDate,
                                         'end': jqFormatEndDate,
