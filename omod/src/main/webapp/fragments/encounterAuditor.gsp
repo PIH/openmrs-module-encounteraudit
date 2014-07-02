@@ -63,7 +63,6 @@
                             var encounterLocation = jq("#encounters-filterByLocation-field").val();
                             var encounterType = jq("#filterByEncounterType-field").val();
                             var numofrecords = jq("#numofrecords").val();
-
                             jq.getJSON('${ ui.actionLink("encounteraudit","encounterAuditor","getAuditEncounters") }',
                                     {
                                         'start': jqFormatStartDate,
@@ -74,6 +73,7 @@
                                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                                     })
                                     .success(function(data) {
+                                        jq('#tabs').tabs('select', 1);
                                         jq('#${ id } > tbody > tr').remove();
                                         var tbody = jq('#${ id } > tbody');
                                         for (index in data) {
