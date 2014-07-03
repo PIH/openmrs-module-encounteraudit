@@ -121,6 +121,11 @@ public class EncounterAuditorFragmentController {
 
         SimpleObject o = SimpleObject.fromObject(encounter, ui, properties);
         o.put("obs", SimpleObject.fromCollection(obs, ui, "id","valueNumeric"));
+        
+
+        Form form = encounter.getForm();
+        Integer formId = form.getFormId();
+        o.put("formId", SimpleObject.fromObject(form, ui, "formId"));
 
         return o;
     }
