@@ -41,7 +41,7 @@
     <article id="suggest">
         <h1>Encounter Data</h1>
         <%=   ui.includeFragment("encounteraudit", "encounterAuditor",
-                [ properties: ["encounterId","patientId","encounterDatetime", "location", "encounterType", "creator"]]) %>
+                [ properties: ["encounterDatetime", "location", "encounterType", "creator"]]) %>
 
 </div>
 </body>

@@ -81,8 +81,9 @@
 
                                                 var row = jq(document.createElement('tr'));
 
-                                                var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&encounterId='  + item.encounterId;
-                                                // http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&personId=16193&formId=65&returnUrl=/openmrs/module/htmlformflowsheet/testChart.list%3FselectTab%3D0&closeAfterSubmission=closeEncounterChartPopup STEVE
+                                                //var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&encounterId='  + item.encounterId;
+                                                var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&personId=' + item.patientId + '&formId=' + '65' + '&returnUrl=/openmrs/module/htmlformflowsheet/testChart.list%3FselectTab%3D0&closeAfterSubmission=closeEncounterChartPopup';
+                                            console.log(encounterFormUrl)
                                                 row.click(function() {
                                                     jq("#encounterDialog").attr('src', encounterFormUrl);
                                                     jq("#encounterFormDiv").dialog({
@@ -111,12 +112,12 @@
                                         // Table sorter - function
                                         jq(document).ready(function() {
                                             jq('#${ id }').tablesorter();
-                                            jq( "#${ id } th:nth-child(1)" ).text( "Encounter ID" );
-                                            jq( "#${ id } th:nth-child(2)" ).text( "Patient ID" );
-                                            jq( "#${ id } th:nth-child(3)" ).text( "Encounter Date" );
-                                            jq( "#${ id } th:nth-child(4)" ).text( "Location" );
-                                            jq( "#${ id } th:nth-child(5)" ).text( "Encounter Type" );
-                                            jq( "#${ id } th:nth-child(6)" ).text( "Creator" );
+                                            // jq( "#${ id } th:nth-child(1)" ).text( "Encounter ID" );
+                                            // jq( "#${ id } th:nth-child(2)" ).text( "Patient ID" );
+                                            jq( "#${ id } th:nth-child(1)" ).text( "Encounter Date" );
+                                            jq( "#${ id } th:nth-child(2)" ).text( "Location" );
+                                            jq( "#${ id } th:nth-child(3)" ).text( "Encounter Type" );
+                                            jq( "#${ id } th:nth-child(4)" ).text( "Creator" );
                                         });
                                         // Table sorter - label for css
                                         jq(document).ready(function() {

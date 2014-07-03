@@ -96,7 +96,7 @@ public class EncounterAuditorFragmentController {
         if (numOfRecords == null)
             numOfRecords =  25;
         if (properties == null || properties.length == 0) {
-            properties = new String[] { "encounterId", "patientId", "encounterType", "encounterDatetime", "location", "provider", "creator"};
+            properties = new String[] { "encounterId", "patientId", "encounterType", "encounterDatetime", "location", "provider", "form", "creator"};
         }
         List<EncounterType> encounterTypes = null;
         if (encounterType != null) {
