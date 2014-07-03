@@ -9,11 +9,10 @@
 %>
 
 <style type="text/css">
-.ex_highlight {
+.row_highlight {
     background: antiquewhite !important;
     padding: 5px;
     margin: 5px
-    text-decoration: none;
 }
 </style>
 

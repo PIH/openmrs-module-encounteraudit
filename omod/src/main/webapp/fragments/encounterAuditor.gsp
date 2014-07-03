@@ -77,24 +77,12 @@
                                         jq('#${ id } > tbody > tr').remove();
                                         var tbody = jq('#${ id } > tbody');
                                         for (index in data) {
-                                            var item = data[index];
+                                            item = data[index];
 
                                                 var row = jq(document.createElement('tr'));
-                                                row.mouseover(function(){
-                                                    jq(this).addClass('ex_highlight');
-                                                    jq(this).css( 'cursor', 'pointer' );
-                                                });
-                                                row.mouseout(function(){
-                                                    jq(this).removeClass('ex_highlight');
-                                                    // jq(this).css("color","black");
-                                                    jq(this).css("text-decoration","none");
-                                                });
-                                                if (index % 2 == 0) {
-                                                    row.addClass('evenRow');
-                                                } else {
-                                                    row.addClass('oddRow');
-                                                }
+
                                                 var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&encounterId='  + item.encounterId;
+                                                // http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&personId=16193&formId=65&returnUrl=/openmrs/module/htmlformflowsheet/testChart.list%3FselectTab%3D0&closeAfterSubmission=closeEncounterChartPopup STEVE
                                                 row.click(function() {
                                                     jq("#encounterDialog").attr('src', encounterFormUrl);
                                                     jq("#encounterFormDiv").dialog({
@@ -115,18 +103,32 @@
                                             var myObs = item.obs;
                                             for (i = 0; i < myObs.length; i++) {
                                                 var tempObs = myObs[i];
-                                                console.log("tempObs.id = " + tempObs.id);
+                                                // console.log("tempObs.id = " + tempObs.id);
                                             }
                                             tbody.append(row);
+
                                         }
                                         // Table sorter - function
                                         jq(document).ready(function() {
                                             jq('#${ id }').tablesorter();
+                                            jq( "#${ id } th:nth-child(1)" ).text( "Encounter ID" );
+                                            jq( "#${ id } th:nth-child(2)" ).text( "Patient ID" );
+                                            jq( "#${ id } th:nth-child(3)" ).text( "Encounter Date" );
+                                            jq( "#${ id } th:nth-child(4)" ).text( "Location" );
+                                            jq( "#${ id } th:nth-child(5)" ).text( "Encounter Type" );
+                                            jq( "#${ id } th:nth-child(6)" ).text( "Creator" );
                                         });
                                         // Table sorter - label for css
                                         jq(document).ready(function() {
                                             jq('#${ id }').addClass('tablesorter');
                                         });
+                                        jq(document).ready(function() {
+                                            jq('#${ id } tr').mouseover(function () {
+                                                jq(this).addClass('row_highlight');
+                                            }).mouseout(function () {
+                                                        jq(this).removeClass('row_highlight');
+                                                    });
+                                         })
                                     })
                                     .error(function(xhr, status, err) {
                                         alert('AJAX error ' + err);
