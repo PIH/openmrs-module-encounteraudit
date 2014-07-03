@@ -120,8 +120,8 @@ public class EncounterAuditorFragmentController {
         Set<Obs> obs = encounter.getObs();
 
         SimpleObject o = SimpleObject.fromObject(encounter, ui, properties);
-        o.put("obs", SimpleObject.fromCollection(obs, ui, "id","valueNumeric"));
-        
+        o.put("obs", SimpleObject.fromCollection(obs, ui, "id","valueNumeric", "valueAsString"));
+
 
         Form form = encounter.getForm();
         Integer formId = form.getFormId();
