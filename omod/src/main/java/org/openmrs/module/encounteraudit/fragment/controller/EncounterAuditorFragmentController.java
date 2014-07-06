@@ -38,6 +38,7 @@ public class EncounterAuditorFragmentController {
                            @FragmentParam(value="location", required=false) Location Location,
                            @RequestParam(value="encountertype", required=false) Collection<EncounterType> encounterType,
                            @RequestParam(value="numofrecords", required=false) Integer numOfRecords,
+                           @RequestParam(value="creatorId", required=false) String creatorId,
                            @FragmentParam(value="end", required=false) Date endDate) {
 
         if (startDate == null)
@@ -50,6 +51,7 @@ public class EncounterAuditorFragmentController {
         model.addAttribute("loc", Location);
         model.addAttribute("encounterTypes", encounterType);
         model.addAttribute("numOfRecords", numOfRecords);
+        model.addAttribute("creatorId", creatorId);
 
         model.addAttribute("encounters", service.getEncounters(null, (org.openmrs.Location) Location, startDate, endDate, null, encounterType, null, false));
     }
@@ -59,6 +61,7 @@ public class EncounterAuditorFragmentController {
                                             @RequestParam(value="location", required=false) Location location,
                                             @RequestParam(value="encountertype", required=false) EncounterType encounterType,
                                             @RequestParam(value="numofrecords", required=false) Integer numOfRecords,
+                                            @RequestParam(value="creatorId", required=false) String creatorId,
                                             @RequestParam(value="properties", required=false) String[] properties,
                                             @SpringBean("encounterAuditService") EncounterAuditService service,
                                             UiUtils ui) {
@@ -76,7 +79,7 @@ public class EncounterAuditorFragmentController {
         }
 
 
-        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, numOfRecords, location, encounterType);
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, numOfRecords, location, encounterType, creatorId);
         return SimpleObject.fromCollection(encs, ui, properties);
     }
 
@@ -85,6 +88,7 @@ public class EncounterAuditorFragmentController {
                                             @RequestParam(value="location", required=false) Location location,
                                             @RequestParam(value="encountertype", required=false) EncounterType encounterType,
                                             @RequestParam(value="numofrecords", required=false) Integer numOfRecords,
+                                            @RequestParam(value="creatorId", required=false) String creatorId,
                                             @RequestParam(value="properties", required=false) String[] properties,
                                             @SpringBean("encounterAuditService") EncounterAuditService service,
                                             UiUtils ui) {
@@ -104,7 +108,7 @@ public class EncounterAuditorFragmentController {
         }
 
 
-        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, numOfRecords, location, encounterType);
+        List<Encounter> encs = service.getAuditEncounters(startDate, endDate, numOfRecords, location, encounterType, creatorId);
         return simplify(ui, encs, properties);
     }
 

@@ -39,5 +39,5 @@ public interface EncounterAuditService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType);
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId);
 }

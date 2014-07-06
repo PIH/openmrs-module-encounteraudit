@@ -49,7 +49,7 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
     }
 
     @Override
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType) {
-        return dao.getAuditEncounters(fromDate, toDate, sampleSize, location, encounterType);
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId) {
+        return dao.getAuditEncounters(fromDate, toDate, sampleSize, location, encounterType, creatorId);
     }
 }

@@ -49,7 +49,7 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
     }
 
     @Override
-    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType) {
+    public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId) {
 
         if (sampleSize < 1) {
             // by default return 25 records
@@ -65,19 +65,26 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
         if (encounterType != null) {
             sql.append(" and encounter_type = :encounterType ");
         }
+        if (creatorId.length() != 0) {
+            sql.append(" and creator = :creatorId and changed_by IS NULL ");
+        }
         sql.append(" order by rand() ");
         sql.append("limit 0,:sampleSize ");
 
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql.toString()).addEntity(Encounter.class);
         query.setDate("fromDate", fromDate);
         query.setDate("toDate", toDate);
+        query.setInteger("sampleSize", new Integer(sampleSize));
+
         if (location != null) {
             query.setInteger("locationId", new Integer(location.getLocationId()));
         }
         if (encounterType != null) {
             query.setInteger("encounterType", new Integer(encounterType.getEncounterTypeId()));
         }
-        query.setInteger("sampleSize", new Integer(sampleSize));
+        if (creatorId.length() != 0) {
+            query.setString("creatorId", creatorId);
+        }
 
         List<Encounter> encounterList = query.list();
 

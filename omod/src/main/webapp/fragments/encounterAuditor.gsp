@@ -5,6 +5,7 @@
     def location = config.location
     def encountertype = config.encountertype
     def numofrecords = config.numofrecords
+    def creatorId = config.creatorId
     def props = config.properties ?: ["encounterType", "encounterDatetime", "location", "provider"]
 %>
 
@@ -63,6 +64,7 @@
                             var encounterLocation = jq("#encounters-filterByLocation-field").val();
                             var encounterType = jq("#filterByEncounterType-field").val();
                             var numofrecords = jq("#numofrecords").val();
+                            var creatorId = jq("#creatorId").val();
                             jq.getJSON('${ ui.actionLink("encounteraudit","encounterAuditor","getAuditEncounters") }',
                                     {
                                         'start': jqFormatStartDate,
@@ -70,6 +72,7 @@
                                         'location' : encounterLocation,
                                         'encountertype' :encounterType,
                                         'numofrecords' :numofrecords,
+                                        'creatorId' :creatorId,
                                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
                                     })
                                     .success(function(data) {
@@ -172,6 +175,10 @@
                                 "formFieldName": "filterByEncounterType",
                                 "label": ""
                         ] ) }</td>
+                    </tr>
+                    <tr>
+                        <td>Creator ID</td>
+                        <td><input id="creatorId" name="Creator" size="6"></td>
                     </tr>
                     <tr>
                         <td>Number of Records</td>
