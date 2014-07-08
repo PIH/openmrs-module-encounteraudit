@@ -177,8 +177,12 @@
                         ] ) }</td>
                     </tr>
                     <tr>
-                        <td>Creator ID</td>
-                        <td><input id="creatorId" name="Creator" size="6"></td>
+                        <td>Creator</td>
+                        <td>${ ui.includeFragment("encounteraudit", "field/user", [
+                                "id": "users-filterByUser",
+                                "formFieldName": "filterByUserId",
+                                "label": ""
+                        ] ) }</td>
                     </tr>
                     <tr>
                         <td>Number of Records</td>
