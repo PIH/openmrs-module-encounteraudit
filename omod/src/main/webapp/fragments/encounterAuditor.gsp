@@ -64,7 +64,7 @@
                             var encounterLocation = jq("#encounters-filterByLocation-field").val();
                             var encounterType = jq("#filterByEncounterType-field").val();
                             var numofrecords = jq("#numofrecords").val();
-                            var creatorId = jq("#creatorId").val();
+                            var creatorId = jq("#users-filterByUser-field").val();
                             jq.getJSON('${ ui.actionLink("encounteraudit","encounterAuditor","getAuditEncounters") }',
                                     {
                                         'start': jqFormatStartDate,
