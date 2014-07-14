@@ -9,21 +9,7 @@ $(document).ready(function() {
     $('.submitButton').click(function() {
     	// parse audit data
     	auditdata = JSON.parse(JSON.stringify(jQuery('#htmlform').serializeArray()));
-
-    	// compare fields (nested loop - vectorize function?)
-        add = [];
-    	for (i = 0; i < datainitial.length; i++) {
-    		for (j = 0; j < auditdata.length; j++)
-    			if (datainitial[i].name == auditdata[j].name) {
-    				if (datainitial[i].value != auditdata[j].value) {
-                        var add = add += '\n ' + datainitial[i].name + ' : ' + datainitial[i].value + '. ';
-    				}
-    			}
-    	}
-        if (add.length > 0) {
-           alert('The following values are different: \n' + add);
-            console.log(add);
-        };
+        compare_obs_array(datainitial,auditdata)
     })
 
     // clear the form here
@@ -43,7 +29,43 @@ $(document).ready(function() {
                     this.checked = false;
             }
         });
-
+    }
+    function compare_obs_array(datainitial,auditdata) {
+        // compare fields (nested loop - vectorize function?)
+        add = []; // initialize results vector
+        // loop through initial obs
+        for (i = 0; i < datainitial.length; i++) {
+            // compare to all audit obs
+            for (j = 0; j < auditdata.length; j++) {
+                if (isNaN(datainitial[i].value)) {
+                    // not a number handling
+                    if (datainitial[i].name == auditdata[j].name) {
+                        // obs ids match
+                        if (datainitial[i].value != auditdata[j].value) {
+                            // values do not match
+                            var add = add += '\n ' + datainitial[i].name + ' : ' + datainitial[i].value + '. ';
+                            $('#' + datainitial[i].name).css({'background-color' : 'red', 'opacity' : '0.5'});
+                        } else {
+                            $('#' + datainitial[i].name).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
+                        }
+                    }
+                } else {
+                    // number handling
+                    if (datainitial[i].name == auditdata[j].name) {
+                        if (+datainitial[i].value != +auditdata[j].value) {
+                            $('#' + datainitial[i].name).css({'background-color' : 'red', 'opacity' : '0.5'});
+                         add = add += '\n ' + datainitial[i].name + ' : ' + datainitial[i].value + '. ';
+                        } else {
+                            $('#' + datainitial[i].name).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
+                        }
+                    }
+                }
+            }
+        }
+        if (add.length > 0) {
+           alert('The following values are different: \n' + add);
+           console.log(add);
+        };
     }
 })
 
