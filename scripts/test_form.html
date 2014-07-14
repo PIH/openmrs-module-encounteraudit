@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script language="JavaScript" type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="compare.js"></script>
+<!-- <script language="JavaScript" type="text/javascript" src="clear_form_elements.js"></script> -->
+</head>
+
+<body>
+
+
+<form id="htmlform">   
+<table>
+        <tr>
+            <td>Visit Date</td>
+
+            <td>Height</td>
+            <td>Weight</td>
+            <td>ART Regimen</td>
+            <td>Side Effects</td>
+            <td>TB Status</td>
+            <td>Pill Count</td>
+            <td>Doses Missed</td>
+            <td align="center" colspan="2">
+                ARVs given
+                <table>
+                    <tr>
+                        <td># tablets</td>
+                        <td>To</td>
+                    </tr>
+                </table>
+            </td>
+            <td>CPT # tablets</td>
+            <td align="center" colspan="2">
+                Family Plan.
+                <table>
+                    <tr>
+                        <td>Depo given</td>
+                        <td># cndms</td>
+                    </tr>
+                </table>
+            </td>
+            
+            <td>Next appointment</td>
+
+        </tr>
+        <tr>
+            <td>
+                
+                <span id='encounterDate'><input type="text" size="10" id="w5-display"/><input type="hidden" name="w5" id="w5" /> (dd/mm/yyyy)<span class="error field-error" style="display: none" id="w6"></span></span>
+            </td>
+
+
+
+            <td>
+                
+                <input type="text" size="5" id="w8" name="w8" value="160.0" onBlur="checkNumber(this,'w7',true,10.0,228.0)"/> <span class="error field-error" style="display: none" id="w7"></span>
+            </td>
+            <td>
+                
+                <input type="text" size="5" id="w10" name="w10" value="59.0" onBlur="checkNumber(this,'w9',true,0.0,250.0)"/> <span class="error field-error" style="display: none" id="w9"></span>
+            </td>
+            <td>
+                
+                <select id="w12" name="w12" size="1"><option value=""></option><option value="8155">1A: d4T / 3TC / NVP (previous 1L)</option><option value="8157">2A: AZT / 3TC / NVP (previous AZT)</option><option value="8159">3A: d4T / 3TC + EFV (previous EFV)</option><option value="8162">4A: AZT / 3TC + EFV (previous AZTEFV)</option><option value="8164" selected="true">5A: TDF + 3TC + EFV</option><option value="8165">6A: TDF / 3TC + NVP</option><option value="8166">7A: TDF / 3TC + LPV/r</option><option value="8167">8A: AZT / 3TC + LPV/r</option><option value="8168">9P: ABC / 3TC + LPV/r</option><option value="8156">1P: d4T / 3TC / NVP</option><option value="8158">2P: AZT / 3TC / NVP</option><option value="8160">3P: d4T / 3TC + EFV</option><option value="8163">4P: AZT / 3TC + EFV</option><option value="6408">Other</option></select> <span class="error field-error" style="display: none" id="w11"></span>
+            </td>
+            <td>
+                
+                <input type="hidden" name="_w14"/><input type="checkbox" id="w14" name="w14" value="1066" checked="true"/><label for="w14">No</label> <span class="error field-error" style="display: none" id="w13"></span>
+                <input type="hidden" name="_w16"/><input type="checkbox" id="w16" name="w16" value="821"/><label for="w16">PN</label> <span class="error field-error" style="display: none" id="w15"></span>
+                <input type="hidden" name="_w18"/><input type="checkbox" id="w18" name="w18" value="29"/><label for="w18">HP</label> <span class="error field-error" style="display: none" id="w17"></span>
+                <input type="hidden" name="_w20"/><input type="checkbox" id="w20" name="w20" value="512"/><label for="w20">SK</label> <span class="error field-error" style="display: none" id="w19"></span>
+                <input type="hidden" name="_w22"/><input type="checkbox" id="w22" name="w22" value="2148"/><label for="w22">Lip</label> <span class="error field-error" style="display: none" id="w21"></span>
+                <input type="hidden" name="_w24"/><input type="checkbox" id="w24" name="w24" value="6408"/><label for="w24">Oth</label> <span class="error field-error" style="display: none" id="w23"></span>
+            </td>
+            <td>
+                
+                <input type="radio" id="w26_0" name="w26" value="7454" checked="true" onMouseDown="radioDown(this)" onClick="radioClicked(this)"/><label for="w26_0">N</label>&#160;<input type="radio" id="w26_1" name="w26" value="7455" onMouseDown="radioDown(this)" onClick="radioClicked(this)"/><label for="w26_1">Y</label>&#160;<input type="radio" id="w26_2" name="w26" value="7456" onMouseDown="radioDown(this)" onClick="radioClicked(this)"/><label for="w26_2">C</label>&#160;<input type="radio" id="w26_3" name="w26" value="7458" onMouseDown="radioDown(this)" onClick="radioClicked(this)"/><label for="w26_3">Rx</label> <span class="error field-error" style="display: none" id="w25"></span>
+            </td>
+            <td>
+                
+                <input type="text" size="5" id="w28" name="w28" value="1" onBlur="checkNumber(this,'w27',false,null,null)"/> <span class="error field-error" style="display: none" id="w27"></span>
+            </td>
+            <td>
+                
+                <input type="text" size="5" id="w30" name="w30" value="0" onBlur="checkNumber(this,'w29',false,null,null)"/> <span class="error field-error" style="display: none" id="w29"></span>
+            </td>
+            <td>
+                
+                <input type="text" size="5" id="w32" name="w32" value="90" onBlur="checkNumber(this,'w31',false,null,null)"/> <span class="error field-error" style="display: none" id="w31"></span>
+            </td>
+            <td style="white-space: nowrap;">
+                
+                <input type="radio" id="w34_0" name="w34" value="false" checked="true" onMouseDown="radioDown(this)" onClick="radioClicked(this)"/><label for="w34_0">P</label>&#160;<input type="radio" id="w34_1" name="w34" value="true" onMouseDown="radioDown(this)" onClick="radioClicked(this)"/><label for="w34_1">G</label> <span class="error field-error" style="display: none" id="w33"></span>
+            </td>
+            <td>
+                
+                <input type="text" size="5" id="w36" name="w36" value="180" onBlur="checkNumber(this,'w35',false,null,null)"/> <span class="error field-error" style="display: none" id="w35"></span>
+            </td>
+            <td>
+                
+                <input type="hidden" name="_w38"/><input type="checkbox" id="w38" name="w38" value="1065"/><label for="w38"></label> <span class="error field-error" style="display: none" id="w37"></span>
+            </td>
+            <td>
+                
+                <input type="text" size="5" id="w40" name="w40" onBlur="checkNumber(this,'w39',false,null,null)"/> <span class="error field-error" style="display: none" id="w39"></span>
+            </td>
+
+            <td>
+                
+                <span id="nextAppointmentDate" class="obs-field"><input type="text" size="10" id="w42-display"/><input type="hidden" name="w42" id="w42" /> (dd/mm/yyyy)<span class="error field-error" style="display: none" id="w41"></span></span>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" colspan="14">
+                <input type="button" class="submitButton" value="Audit" onClick="auditHtmlForm()"/>
+            </td>
+        </tr>
+    </table>
+</form>
