@@ -1,7 +1,9 @@
 $(document).ready(function() {
-	// parse initial data
+	// parse initial data (old method)
     // dataInitial = JSON.parse(JSON.stringify(jQuery('#htmlform').serializeArray()));
 
+    // parse initial data (create objects)
+        // constructor
     dataInitial = {};
     dataInitial.list = [];
     function formObsInitial(element, name, value, ans_concept_string, type) {
@@ -13,6 +15,7 @@ $(document).ready(function() {
         dataInitial[element] = this;
         dataInitial.list[dataInitial.list.length] = element;
     }
+        // individual obs
     w5 = new formObsInitial('w5','Encounter Date','01/06/2014',[],'value_datetime');
     w8 = new formObsInitial('w8','Height',160,[],'value_numeric');
     w10 = new formObsInitial('w10','Weight',59,[],'value_numeric');
@@ -26,21 +29,34 @@ $(document).ready(function() {
     w36 = new formObsInitial('w36','CPT Given',180,[],'value_numeric');
     w38 = new formObsInitial('w38','Depo Provera Given',1065,[],'value_coded');
     w40 = new formObsInitial('w40','Condoms Given',[],[],'value_numeric');
-    w42 = new formObsInitial('w5','Appointment Date','01/09/2014',[],'value_datetime');
+    w42 = new formObsInitial('w42','Appointment Date','01/09/2014',[],'value_datetime');
 
     // call function to clear fields 
     clear_form_elements('#htmlform');
 
-    // audit function
+    // submit actions
     $('.submitButton').click(function() {
     	// parse audit data
     	auditdata = JSON.parse(JSON.stringify(jQuery('#htmlform').serializeArray()));
         compare_obs_array(dataInitial,auditdata)
+        $( '#dialog' ).dialog('open');
+        if (add.length > 0) {
+           $('#dialog p').remove(); // remove any text and repopulate
+           $('#dialog ul').remove(); // remove any text and repopulate
+           $('#dialog').append('<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span> The following values are different:</p><p><ul>' + add + '</ul></p>')
+        };
+        // build the obs string once per submit
+        if (dOpened > 0) {
+            add = [];
+            dOpened +=1 ;
+            console.log(dOpened);
+        } else {
+            dOpened += 1;
+        }
     })
 
-    // clear the form here
+    // function to clear the form
     function clear_form_elements(ele) {
-
         $(ele).find(':input').each(function() {
             switch(this.type) {
                 case 'password':
@@ -49,6 +65,7 @@ $(document).ready(function() {
                 case 'text':
                 case 'textarea':
                     $(this).val('');
+                    $(this).css({'background-color' : 'white'});
                     break;
                 case 'checkbox':
                 case 'radio':
@@ -56,6 +73,8 @@ $(document).ready(function() {
             }
         });
     }
+
+    // function to compare the data
     function compare_obs_array(dataInitial,auditdata) {
         // compare fields (nested loop - vectorize function?)
         add = []; // initialize results vector
@@ -69,7 +88,7 @@ $(document).ready(function() {
                         // obs ids match
                         if (dataInitial[dataInitial.list[i]].value != auditdata[j].value) {
                             // values do not match
-                            var add = add += '\n ' + dataInitial[dataInitial.list[i]].name + ' : ' + dataInitial[dataInitial.list[i]].value + '. ';
+                            add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '. ';
                             $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
                         } else {
                             $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
@@ -80,7 +99,7 @@ $(document).ready(function() {
                     if (dataInitial.list[i] == auditdata[j].name) {
                         if (+dataInitial[dataInitial.list[i]].value != +auditdata[j].value) {
                             $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
-                         var add = add += '\n ' + dataInitial[dataInitial.list[i]].name + ' : ' + dataInitial[dataInitial.list[i]].value + '. ';
+                        add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '. ';
                         } else {
                             $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
                         }
@@ -88,10 +107,27 @@ $(document).ready(function() {
                 }
             }
         }
-        if (add.length > 0) {
-           alert('The following values are different: \n' + add);
-           console.log(add);
-        };
+
+        // dialog function
+        $( '#dialog' ).dialog( { 
+            autoOpen: false,
+            position: { my: 'top', at: 'top+30' },
+            buttons: {
+                "Audit": function() {
+                    $(this).dialog( "close" );
+                    },
+                "Edit": function() {
+                    $(this).dialog("close");
+                },
+                "Cancel": function() {
+                    $(this).dialog( "close" );
+                    clear_form_elements('#htmlform');
+                    }
+                },
+            // height: 140,
+            width: 500    
+        } );
+
     }
 })
 
