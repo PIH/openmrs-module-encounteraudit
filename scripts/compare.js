@@ -45,14 +45,6 @@ $(document).ready(function() {
            $('#dialog ul').remove(); // remove any text and repopulate
            $('#dialog').append('<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span> The following values are different:</p><p><ul>' + add + '</ul></p>')
         };
-        // build the obs string once per submit
-        if (dOpened > 0) {
-            add = [];
-            dOpened +=1 ;
-            console.log(dOpened);
-        } else {
-            dOpened += 1;
-        }
     })
 
     // function to clear the form
