@@ -15,11 +15,14 @@ package org.openmrs.module.encounteraudit.api.db.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Expression;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
 
 import javax.validation.constraints.Null;
@@ -46,6 +49,21 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
      */
     public SessionFactory getSessionFactory() {
 	    return sessionFactory;
+    }
+
+    @Override
+    public List<EncounterAuditProject> getAuditProjects() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(EncounterAuditProject.class);
+        criteria.add(Expression.eq("voided", false));
+
+        try {
+            List<EncounterAuditProject> list = criteria.list();
+        } catch (Exception e) {
+            int i =0;
+        }
+
+        return criteria.list();
+
     }
 
     @Override
@@ -90,4 +108,5 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
 
         return encounterList;
     }
+
 }

@@ -13,12 +13,16 @@
  */
 package org.openmrs.module.encounteraudit.api.impl;
 
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.encounteraudit.EncounterAudit;
+import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
 
@@ -48,8 +52,14 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
 	    return dao;
     }
 
+
     @Override
     public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId) {
         return dao.getAuditEncounters(fromDate, toDate, sampleSize, location, encounterType, creatorId);
+    }
+
+    @Override
+    public List<EncounterAuditProject> getAuditProjects() {
+        return dao.getAuditProjects();
     }
 }

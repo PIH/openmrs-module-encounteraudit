@@ -3,6 +3,7 @@ package org.openmrs.module.encounteraudit.fragment.controller;
 
 import org.openmrs.*;
 import org.openmrs.api.EncounterService;
+import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-public class EncounterAuditorFragmentController {
+public class EncounterLayoutFragmentController {
 
     private Date defaultStartDate() {
         Calendar cal = Calendar.getInstance();
@@ -34,6 +35,7 @@ public class EncounterAuditorFragmentController {
 
     public void controller(FragmentModel model,
                            @SpringBean("encounterService") EncounterService service,
+                           @SpringBean("encounterAuditService") EncounterAuditService auditService,
                            @FragmentParam(value="start", required=false) Date startDate,
                            @FragmentParam(value="location", required=false) Location Location,
                            @RequestParam(value="encountertype", required=false) Collection<EncounterType> encounterType,
@@ -53,6 +55,9 @@ public class EncounterAuditorFragmentController {
         model.addAttribute("numOfRecords", numOfRecords);
         model.addAttribute("creatorId", creatorId);
 
+        List<EncounterAuditProject> projects = auditService.getAuditProjects();
+
+        model.addAttribute("projects",projects);
         model.addAttribute("encounters", service.getEncounters(null, (org.openmrs.Location) Location, startDate, endDate, null, encounterType, null, false));
     }
 
@@ -121,10 +126,10 @@ public class EncounterAuditorFragmentController {
     }
 
     SimpleObject simplify(UiUtils ui, Encounter encounter, String[] properties) {
-        Set<Obs> obs = encounter.getObs();
+//        Set<Obs> obs = encounter.getObs();
 
         SimpleObject o = SimpleObject.fromObject(encounter, ui, properties);
-        o.put("obs", SimpleObject.fromCollection(obs, ui, "id","valueNumeric", "valueAsString"));
+//        o.put("obs", SimpleObject.fromCollection(obs, ui, "id","valueNumeric", "valueAsString"));
 
 
         Form form = encounter.getForm();

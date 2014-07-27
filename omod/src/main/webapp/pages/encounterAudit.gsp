@@ -17,10 +17,8 @@
 </style>
 
 <br><br>
-<script>
-    var jq = jQuery;
-</script>
-<body data-spy="scroll" data-target="#menu">
+
+<!-- <body data-spy="scroll" data-target="#menu"> -->
 <header id="style-guide-header">
     <h1><i class="icon-edit"></i>OpenMRS Encounter Audit Module</h1>
     <h2 align="right">$context.authenticatedUser.personName.fullName <i class="icon-user small"></i></h2>
@@ -38,9 +36,8 @@
 
 <div id="body-wrapper">
 
-    <article id="suggest">
         <h1>Encounter Data</h1>
-        <%=   ui.includeFragment("encounteraudit", "encounterAuditor",
+        <%=   ui.includeFragment("encounteraudit", "encounterLayout",
                 [ properties: ["encounterDatetime", "location", "encounterType", "creator"]]) %>
 
 </div>
