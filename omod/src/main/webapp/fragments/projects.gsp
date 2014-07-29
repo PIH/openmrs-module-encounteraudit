@@ -24,7 +24,7 @@
 </ul> -->
 
 <ul id="projects" class="select" align="left">
-    <li value="New Project" class="removeme">New Project</li>
+    <li value="New Project">New Project</li>
     <% projects.each { proj -> %>
     <li value="<%= ui.format(proj.name) %>"><%= ui.format(proj.name) %></li>
     <% } %>

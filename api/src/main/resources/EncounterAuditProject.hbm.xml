@@ -24,6 +24,14 @@
             </type>
         </property>
 
+        <set name="projectParameters" table="encounteraudit_project_parameter" lazy="true" cascade="none">
+            <key column="project_id" />
+            <many-to-many class="org.openmrs.module.encounteraudit.EncounterAuditParameter">
+                <column name="parameter_id" />
+            </many-to-many>
+        </set>
+
+
         <property name="uuid" type="java.lang.String" column="uuid" length="38" unique="true" />
         <property name="dateCreated" type="java.util.Date" column="date_created" not-null="true" length="19" />
         <property name="dateChanged" type="java.util.Date" column="date_changed" length="19"/>

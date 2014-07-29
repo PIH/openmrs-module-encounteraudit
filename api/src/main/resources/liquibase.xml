@@ -135,14 +135,14 @@
                                  baseTableName="encounteraudit_encounter" baseColumnNames="project_id"
                                  referencedTableName="encounteraudit_project" referencedColumnNames="id"/>
 
-        <addForeignKeyConstraint constraintName="encounteraudit_encounter_encounter_id"
-                                 baseTableName="encounteraudit_encounter" baseColumnNames="encounter_id"
-                                 referencedTableName="encounter" referencedColumnNames="encounter_id"/>
-
         <addForeignKeyConstraint constraintName="encounteraudit_encounter_auditor"
                                  baseTableName="encounteraudit_encounter" baseColumnNames="auditor"
                                  referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="encounteraudit_encounter_encounter_id"
+                                 baseTableName="encounteraudit_encounter" baseColumnNames="encounter_id"
 
+
+                                 referencedTableName="encounter" referencedColumnNames="encounter_id"/>
         <addForeignKeyConstraint constraintName="encounteraudit_encounter_changed_by"
                                  baseTableName="encounteraudit_encounter" baseColumnNames="changed_by"
                                  referencedTableName="users" referencedColumnNames="user_id"/>
@@ -223,6 +223,35 @@
         <addForeignKeyConstraint constraintName="encounteraudit_obs_voided_by"
                                  baseTableName="encounteraudit_obs" baseColumnNames="voided_by"
                                  referencedTableName="users" referencedColumnNames="user_id"/>
+
+    </changeSet>
+
+    <changeSet id="201407281751-1" author="pochedls">
+        <comment>Adds encounteraudit_Project_parameter table</comment>
+        <createTable tableName="encounteraudit_project_parameter">
+
+            <column name="project_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="parameter_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="parameter_value" type="varchar(45)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="encounteraudit_project_parameter"
+                       columnNames="project_id,parameter_id"
+                       constraintName="key_for_encounteraudit_project_parameter"/>
+        <addForeignKeyConstraint constraintName="encounteraudit_project_parameter_project_id"
+                                 baseTableName="encounteraudit_project_parameter" baseColumnNames="project_id"
+                                 referencedTableName="encounteraudit_project" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="encounteraudit_project_parameter_parameter_id"
+                                 baseTableName="encounteraudit_project_parameter" baseColumnNames="parameter_id"
+                                 referencedTableName="encounteraudit_parameter" referencedColumnNames="parameter_id"/>
 
     </changeSet>
 

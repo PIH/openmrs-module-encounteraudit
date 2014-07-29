@@ -3,6 +3,7 @@ package org.openmrs.module.encounteraudit;
 import org.openmrs.BaseOpenmrsData;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by cosmin on 6/18/14.
@@ -25,6 +26,7 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
 
     private EncounterAuditProjectStatus projectStatus;
 
+    private Set<EncounterAuditParameter> projectParameters;
 
 
     @Override
@@ -59,5 +61,13 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
 
     public void setProjectStatus(EncounterAuditProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
+    }
+
+    public Set<EncounterAuditParameter> getProjectParameters() {
+        return projectParameters;
+    }
+
+    public void setProjectParameters(Set<EncounterAuditParameter> projectParameters) {
+        this.projectParameters = projectParameters;
     }
 }
