@@ -22,6 +22,7 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.encounteraudit.EncounterAudit;
+import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
@@ -61,5 +62,10 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
     @Override
     public List<EncounterAuditProject> getAuditProjects() {
         return dao.getAuditProjects();
+    }
+
+    @Override
+    public List<EncounterAuditParameter> getAuditProjectParameters() {
+        return dao.getAuditProjectParameters();
     }
 }

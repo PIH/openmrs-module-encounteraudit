@@ -24,11 +24,9 @@
             </type>
         </property>
 
-        <set name="projectParameters" table="encounteraudit_project_parameter" lazy="true" cascade="none">
+        <set name="projectParameters" table="encounteraudit_project_parameter" access="field" fetch="select" >
             <key column="project_id" />
-            <many-to-many class="org.openmrs.module.encounteraudit.EncounterAuditParameter">
-                <column name="parameter_id" />
-            </many-to-many>
+            <one-to-many class="org.openmrs.module.encounteraudit.EncounterAuditProjectParameter" />
         </set>
 
 

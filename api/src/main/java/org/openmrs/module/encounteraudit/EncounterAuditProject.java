@@ -26,7 +26,7 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
 
     private EncounterAuditProjectStatus projectStatus;
 
-    private Set<EncounterAuditParameter> projectParameters;
+    private Set<EncounterAuditProjectParameter> projectParameters;
 
 
     @Override
@@ -63,11 +63,11 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
         this.projectStatus = projectStatus;
     }
 
-    public Set<EncounterAuditParameter> getProjectParameters() {
+    public Set<EncounterAuditProjectParameter> getProjectParameters() {
         return projectParameters;
     }
 
-    public void setProjectParameters(Set<EncounterAuditParameter> projectParameters) {
+    public void setProjectParameters(Set<EncounterAuditProjectParameter> projectParameters) {
         this.projectParameters = projectParameters;
     }
 }

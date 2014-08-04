@@ -3,6 +3,7 @@ package org.openmrs.module.encounteraudit.fragment.controller;
 
 import org.openmrs.*;
 import org.openmrs.api.EncounterService;
+import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.ui.framework.SimpleObject;
@@ -56,8 +57,11 @@ public class EncounterLayoutFragmentController {
         model.addAttribute("creatorId", creatorId);
 
         List<EncounterAuditProject> projects = auditService.getAuditProjects();
-
         model.addAttribute("projects",projects);
+
+        List<EncounterAuditParameter> projectParameters = auditService.getAuditProjectParameters();
+        model.addAttribute("projectParameters",projectParameters);
+
         model.addAttribute("encounters", service.getEncounters(null, (org.openmrs.Location) Location, startDate, endDate, null, encounterType, null, false));
     }
 

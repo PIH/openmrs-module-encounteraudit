@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.encounteraudit">
+
+    <class name="EncounterAuditProjectParameter" table="${project.parent.artifactId}_project_parameter">
+
+        <composite-id name="id" class="EncounterAuditProjectParameterId">
+            <key-many-to-one name="project" class="EncounterAuditProject" column="project_id" />
+            <key-many-to-one name="parameter" class="EncounterAuditParameter" column="parameter_id" />
+        </composite-id>
+        <property name="parameterValue" type="java.lang.String" column="parameter_value" length="45" not-null="false" />
+
+    </class>
+
+
+</hibernate-mapping>

@@ -22,6 +22,7 @@ import org.hibernate.criterion.Expression;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
 
@@ -55,14 +56,28 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
     public List<EncounterAuditProject> getAuditProjects() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(EncounterAuditProject.class);
         criteria.add(Expression.eq("voided", false));
-
+        List<EncounterAuditProject> list = null;
         try {
-            List<EncounterAuditProject> list = criteria.list();
+            list = (List<EncounterAuditProject>) criteria.list();
         } catch (Exception e) {
-            int i =0;
+            log.error("Error retrieving projects", e);
         }
 
-        return criteria.list();
+        return list;
+
+    }
+
+    @Override
+    public List<EncounterAuditParameter> getAuditProjectParameters() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(EncounterAuditParameter.class);
+        List<EncounterAuditParameter> list = null;
+        try {
+             list = criteria.list();
+        } catch (Exception e) {
+            log.error("Error retrieving parameters", e);
+        }
+
+        return list;
 
     }
 

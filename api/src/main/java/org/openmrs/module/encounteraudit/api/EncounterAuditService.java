@@ -18,6 +18,7 @@ import org.openmrs.EncounterType;
 import org.openmrs.Location;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.encounteraudit.EncounterAudit;
+import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,4 +45,6 @@ public interface EncounterAuditService extends OpenmrsService {
     public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId);
 
     public List<EncounterAuditProject> getAuditProjects();
+
+    public List<EncounterAuditParameter> getAuditProjectParameters();
 }

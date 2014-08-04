@@ -16,6 +16,7 @@ package org.openmrs.module.encounteraudit.api.db;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 
@@ -33,5 +34,7 @@ public interface EncounterAuditDAO {
     public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId);
 
     public List<EncounterAuditProject> getAuditProjects();
+
+    public List<EncounterAuditParameter> getAuditProjectParameters();
 
 }
