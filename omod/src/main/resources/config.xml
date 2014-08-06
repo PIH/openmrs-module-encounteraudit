@@ -39,6 +39,7 @@
 	<mappingFiles>
 				
 		EncounterAuditParameter.hbm.xml
+        EncounterAuditProjectParameter.hbm.xml
         EncounterAuditProject.hbm.xml
         EncounterAuditEncounter.hbm.xml
         EncounterAuditObs.hbm.xml
