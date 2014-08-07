@@ -16,6 +16,7 @@ package org.openmrs.module.encounteraudit.api;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.encounteraudit.EncounterAudit;
 import org.openmrs.module.encounteraudit.EncounterAuditParameter;
@@ -47,4 +48,8 @@ public interface EncounterAuditService extends OpenmrsService {
     public List<EncounterAuditProject> getAuditProjects();
 
     public List<EncounterAuditParameter> getAuditProjectParameters();
+
+    public EncounterAuditProject saveEncounterAuditProject(EncounterAuditProject encounterAuditProject);
+
+    public EncounterAuditParameter getParameterByName(String name) throws APIException;
 }

@@ -21,6 +21,9 @@
         jq("#projects li").click(function() {
             jq(".project_select").removeClass("project_select")
             jq( this ).toggleClass("project_select");
+            var projectId = jq(this).attr("data-project-id");
+            console.log("projectId=" + projectId);
+            jq("#projectName").val(jq(this).attr("data-project-name"));
         })
     })
 </script>
@@ -30,17 +33,21 @@ jq = jQuery;
 jq(function() {
 
     jq('#${ id }_button').click(function() {
-    var encounterStartDate = jq("#startDateField-display").val();
-    var encounterEndDate = jq("#endDateField-display").val();
-    var jqStartDate = jq.datepicker.parseDate('dd-mm-yy', encounterStartDate);
-    var jqEndDate = jq.datepicker.parseDate('dd-mm-yy', encounterEndDate);
-    var jqFormatStartDate = jq.datepicker.formatDate('yy-mm-dd', jqStartDate);
-    var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
-    var encounterLocation = jq("#encounters-filterByLocation-field").val();
-    var encounterType = jq("#filterByEncounterType-field").val();
-    var numofrecords = jq("#numofrecords").val();
-    var creatorId = jq("#users-filterByUser-field").val();
-    jq.getJSON('${ ui.actionLink("encounteraudit","encounterLayout","getAuditEncounters") }',
+        var encounterStartDate = jq("#startDateField-display").val();
+        var encounterEndDate = jq("#endDateField-display").val();
+        var jqStartDate = jq.datepicker.parseDate('dd-mm-yy', encounterStartDate);
+        var jqEndDate = jq.datepicker.parseDate('dd-mm-yy', encounterEndDate);
+        var jqFormatStartDate = jq.datepicker.formatDate('yy-mm-dd', jqStartDate);
+        var jqFormatEndDate = jq.datepicker.formatDate('yy-mm-dd', jqEndDate);
+        var encounterLocation = jq("#encounters-filterByLocation-field").val();
+        var encounterType = jq("#filterByEncounterType-field").val();
+        var numofrecords = jq("#numofrecords").val();
+        var creatorId = jq("#users-filterByUser-field").val();
+        console.log("sampling records");
+        var projectId = jq("#projectId").val();
+        var projectName = jq("#projectName").val();
+
+        jq.getJSON('${ ui.actionLink("encounteraudit","encounterLayout","getAuditEncounters") }',
                                     {
                                         'start': jqFormatStartDate,
                                         'end': jqFormatEndDate,
@@ -48,6 +55,8 @@ jq(function() {
                                         'encountertype' :encounterType,
                                         'numofrecords' :numofrecords,
                                         'creatorId' :creatorId,
+                                        'projectId' :projectId,
+                                        'projectName' :projectName,
                                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
 })
 .success(function(data) {

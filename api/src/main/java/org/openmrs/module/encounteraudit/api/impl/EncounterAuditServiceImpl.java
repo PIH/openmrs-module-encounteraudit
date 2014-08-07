@@ -18,6 +18,7 @@ import org.hibernate.SessionFactory;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,5 +68,15 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
     @Override
     public List<EncounterAuditParameter> getAuditProjectParameters() {
         return dao.getAuditProjectParameters();
+    }
+
+    @Override
+    public EncounterAuditProject saveEncounterAuditProject(EncounterAuditProject encounterAuditProject) {
+        return dao.saveEncounterAuditProject(encounterAuditProject);
+    }
+
+    @Override
+    public EncounterAuditParameter getParameterByName(String name) throws APIException {
+        return dao.getParameterByName(name);
     }
 }

@@ -25,8 +25,10 @@
 
 <ul id="projects" class="select" align="left">
     <li value="New Project">New Project</li>
-    <% projects.each { proj -> %>
-    <li value="<%= ui.format(proj.name) %>"><%= ui.format(proj.name) %></li>
+    <% projects.each { proj ->
+        def projectId = proj.id
+    %>
+    <li data-project-id="${ projectId }" data-project-name="${ proj.name }" value="<%= ui.format(proj.name) %>"><%= ui.format(proj.name) %></li>
     <% } %>
 </ul>
 

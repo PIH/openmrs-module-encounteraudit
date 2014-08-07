@@ -8,10 +8,11 @@
 <br>
 <br>
 
-<table border="0">
+<table id="projectParametersTable" border="0">
+    <input id="projectId" type="hidden">
     <tr>
         <td>Project Name</td>
-        <td><input></td>
+        <td><input id="projectName"> </td>
     </tr>
     <tr>
         <td>Description</td>

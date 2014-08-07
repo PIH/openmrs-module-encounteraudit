@@ -22,6 +22,7 @@ import org.hibernate.criterion.Expression;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.api.db.DAOException;
 import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
@@ -124,4 +125,21 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
         return encounterList;
     }
 
+    @Override
+    public EncounterAuditProject saveEncounterAuditProject(EncounterAuditProject encounterAuditProject) {
+        try{
+            sessionFactory.getCurrentSession().saveOrUpdate(encounterAuditProject);
+        } catch (Exception e) {
+            log.error("Error saving encounter audit project", e);
+        }
+        return encounterAuditProject;
+    }
+
+    @Override
+    public EncounterAuditParameter getParameterByName(String name)  throws DAOException {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(EncounterAuditParameter.class);
+        crit.add(Expression.eq("name", name));
+        EncounterAuditParameter encounterAuditParameter = (EncounterAuditParameter) crit.uniqueResult();
+        return encounterAuditParameter;
+    }
 }

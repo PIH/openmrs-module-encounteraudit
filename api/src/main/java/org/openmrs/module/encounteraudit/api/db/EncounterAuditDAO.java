@@ -16,6 +16,7 @@ package org.openmrs.module.encounteraudit.api.db;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.api.db.DAOException;
 import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
@@ -36,5 +37,9 @@ public interface EncounterAuditDAO {
     public List<EncounterAuditProject> getAuditProjects();
 
     public List<EncounterAuditParameter> getAuditProjectParameters();
+
+    public EncounterAuditProject saveEncounterAuditProject(EncounterAuditProject encounterAuditProject);
+
+    public EncounterAuditParameter getParameterByName(String name) throws DAOException;
 
 }
