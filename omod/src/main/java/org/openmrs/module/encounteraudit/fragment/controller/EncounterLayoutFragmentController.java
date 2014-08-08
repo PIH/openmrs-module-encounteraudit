@@ -68,8 +68,8 @@ public class EncounterLayoutFragmentController {
         for (EncounterAuditProject project : projects) {
             Set<EncounterAuditProjectParameter> projectParameters = project.getProjectParameters();
             for (EncounterAuditProjectParameter projectParameter : projectParameters) {
-                log.debug("parameterName = " + projectParameter.getEncounterAuditParameter().getName());
-                log.debug("parameterClassName = " + projectParameter.getEncounterAuditParameter().getClassName());
+                log.debug("parameterName = " + projectParameter.getParameter().getName());
+                log.debug("parameterClassName = " + projectParameter.getParameter().getClassName());
                 log.debug("parameterValue = " + projectParameter.getParameterValue());
             }
         }
@@ -161,15 +161,13 @@ public class EncounterLayoutFragmentController {
         encounterAuditProject.setProjectType(EncounterAuditProject.EncounterAuditProjectType.LQAS);
         encounterAuditProject.setProjectStatus(EncounterAuditProject.EncounterAuditProjectStatus.INCOMPLETE);
 
-        encounterAuditProject = service.saveEncounterAuditProject(encounterAuditProject);
         EncounterAuditParameter locationParameter = service.getParameterByName("location");
-        Set<EncounterAuditProjectParameter> parameterSet = new HashSet<EncounterAuditProjectParameter>();
         EncounterAuditProjectParameter projectParameter = new EncounterAuditProjectParameter();
-        projectParameter.setEncounterAuditParameter(locationParameter);
-        projectParameter.setEncounterAuditProject(encounterAuditProject);
+        projectParameter.setParameter(locationParameter);
+        projectParameter.setProject(encounterAuditProject);
         projectParameter.setParameterValue("Neno District Hospital");
-        parameterSet.add(projectParameter);
-        encounterAuditProject.setProjectParameters(parameterSet);
+        encounterAuditProject.addProjectParameter(projectParameter);
+
         encounterAuditProject = service.saveEncounterAuditProject(encounterAuditProject);
 
         List<Encounter> encs = service.getAuditEncounters(startDate, endDate, numOfRecords, location, encounterType, creatorId);

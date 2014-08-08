@@ -230,6 +230,10 @@
         <comment>Adds encounteraudit_Project_parameter table</comment>
         <createTable tableName="encounteraudit_project_parameter">
 
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
             <column name="project_id" type="int">
                 <constraints nullable="false"/>
             </column>
@@ -243,9 +247,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey tableName="encounteraudit_project_parameter"
-                       columnNames="project_id,parameter_id"
-                       constraintName="key_for_encounteraudit_project_parameter"/>
+
         <addForeignKeyConstraint constraintName="encounteraudit_project_parameter_project_id"
                                  baseTableName="encounteraudit_project_parameter" baseColumnNames="project_id"
                                  referencedTableName="encounteraudit_project" referencedColumnNames="id"/>

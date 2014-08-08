@@ -25,6 +25,7 @@ import org.openmrs.Location;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
+import org.openmrs.module.encounteraudit.EncounterAuditProjectParameter;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
 
 import javax.validation.constraints.Null;
@@ -142,4 +143,5 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
         EncounterAuditParameter encounterAuditParameter = (EncounterAuditParameter) crit.uniqueResult();
         return encounterAuditParameter;
     }
+
 }

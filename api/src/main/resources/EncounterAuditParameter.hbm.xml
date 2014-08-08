@@ -6,7 +6,7 @@
 <hibernate-mapping package="org.openmrs.module.encounteraudit">
 
     <class name="EncounterAuditParameter" table="${project.parent.artifactId}_parameter">
-        <id name="parameterId" type="int" column="parameter_id" unsaved-value="0">
+        <id name="parameterId" type="java.lang.Integer" column="parameter_id" unsaved-value="0">
             <generator class="native" />
         </id>
 

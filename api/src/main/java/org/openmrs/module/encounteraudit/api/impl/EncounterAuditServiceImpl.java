@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.encounteraudit.EncounterAudit;
 import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
+import org.openmrs.module.encounteraudit.EncounterAuditProjectParameter;
 import org.openmrs.module.encounteraudit.api.EncounterAuditService;
 import org.openmrs.module.encounteraudit.api.db.EncounterAuditDAO;
 
@@ -79,4 +80,5 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
     public EncounterAuditParameter getParameterByName(String name) throws APIException {
         return dao.getParameterByName(name);
     }
+
 }

@@ -9,35 +9,42 @@ import java.io.Serializable;
  */
 public class EncounterAuditProjectParameter  implements Serializable {
 
-    private EncounterAuditProjectParameterId id = new EncounterAuditProjectParameterId();
+    private Integer id;
+
+    private EncounterAuditProject project;
+
+    private EncounterAuditParameter parameter;
+
     private String parameterValue;
 
-    public EncounterAuditProjectParameter() {
+    public EncounterAuditProjectParameter() {}
 
-    }
-
-    public EncounterAuditProjectParameterId getId() {
-        return id;
-    }
-
-    public void setId(EncounterAuditProjectParameterId id) {
+    public EncounterAuditProjectParameter(Integer id) {
         this.id = id;
     }
 
-    public EncounterAuditProject getEncounterAuditProject() {
-        return id.getProject();
+    public Integer getId() {
+        return id;
     }
 
-    public void setEncounterAuditProject( EncounterAuditProject encounterAuditProject) {
-       getId().setProject(encounterAuditProject);
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public EncounterAuditParameter getEncounterAuditParameter() {
-        return id.getParameter();
+    public EncounterAuditProject getProject() {
+        return project;
     }
 
-    public void setEncounterAuditParameter( EncounterAuditParameter encounterAuditParameter) {
-        getId().setParameter(encounterAuditParameter);
+    public void setProject(EncounterAuditProject project) {
+        this.project = project;
+    }
+
+    public EncounterAuditParameter getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(EncounterAuditParameter parameter) {
+        this.parameter = parameter;
     }
 
     public String getParameterValue() {

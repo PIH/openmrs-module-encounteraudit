@@ -6,7 +6,7 @@
 <hibernate-mapping package="org.openmrs.module.encounteraudit">
 
     <class name="EncounterAuditProject" table="${project.parent.artifactId}_project">
-        <id name="id" type="int" column="id" unsaved-value="0">
+        <id name="id" type="java.lang.Integer" column="id" unsaved-value="0">
             <generator class="native" />
         </id>
 
@@ -24,8 +24,8 @@
             </type>
         </property>
 
-        <set name="projectParameters" table="encounteraudit_project_parameter" access="field" fetch="select" >
-            <key column="project_id" />
+        <set name="projectParameters" lazy="false" inverse="true" cascade="all-delete-orphan">
+            <key column="project_id" not-null="true"/>
             <one-to-many class="org.openmrs.module.encounteraudit.EncounterAuditProjectParameter" />
         </set>
 

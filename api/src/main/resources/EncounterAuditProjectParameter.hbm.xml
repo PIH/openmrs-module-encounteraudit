@@ -7,10 +7,13 @@
 
     <class name="EncounterAuditProjectParameter" table="${project.parent.artifactId}_project_parameter">
 
-        <composite-id name="id" class="EncounterAuditProjectParameterId">
-            <key-many-to-one name="project" class="EncounterAuditProject" column="project_id" />
-            <key-many-to-one name="parameter" class="EncounterAuditParameter" column="parameter_id" />
-        </composite-id>
+        <id name="id" type="java.lang.Integer" column="id" unsaved-value="0">
+            <generator class="native" />
+        </id>
+
+        <many-to-one name="project" class="EncounterAuditProject" column="project_id" not-null="true" />
+        <many-to-one name="parameter" class="EncounterAuditParameter" column="parameter_id" not-null="true" />
+
         <property name="parameterValue" type="java.lang.String" column="parameter_value" length="45" not-null="false" />
 
     </class>

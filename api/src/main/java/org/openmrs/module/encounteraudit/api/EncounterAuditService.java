@@ -21,6 +21,7 @@ import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.encounteraudit.EncounterAudit;
 import org.openmrs.module.encounteraudit.EncounterAuditParameter;
 import org.openmrs.module.encounteraudit.EncounterAuditProject;
+import org.openmrs.module.encounteraudit.EncounterAuditProjectParameter;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -52,4 +53,5 @@ public interface EncounterAuditService extends OpenmrsService {
     public EncounterAuditProject saveEncounterAuditProject(EncounterAuditProject encounterAuditProject);
 
     public EncounterAuditParameter getParameterByName(String name) throws APIException;
+
 }

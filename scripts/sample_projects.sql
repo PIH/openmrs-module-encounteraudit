@@ -13,19 +13,19 @@ VALUES (4, "LQAS NDH", "LQAS", "INCOMPLETE", 58324, "b71bb89a-2695-102d-b4c2-001
 
 
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (1, "description", "java.lang", "");
+VALUES (1, "description", "java.lang.String", "");
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (2, "start_date", "java.util", NULL);
+VALUES (2, "start_date", "java.util.Date", NULL);
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (3, "end_date", "java.util", NULL);
+VALUES (3, "end_date", "java.util.Date", NULL);
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (4, "location", "org.openmrs", NULL);
+VALUES (4, "location", "org.openmrs.Location", NULL);
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (5, "encounter_type", "org.openmrs", NULL);
+VALUES (5, "encounter_type", "org.openmrs.EncounterType", NULL);
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (6, "creator", "java.lang", NULL);
+VALUES (6, "creator", "org.openmrs.User", NULL);
 INSERT INTO encounteraudit_parameter (parameter_id, name, class_name, default_value)
-VALUES (7, "number_of_records", "java.lang", 25);
+VALUES (7, "number_of_records", "java.lang.Integer", 25);
 
 
 INSERT INTO encounteraudit_project_parameter (project_id, parameter_id, parameter_value)
