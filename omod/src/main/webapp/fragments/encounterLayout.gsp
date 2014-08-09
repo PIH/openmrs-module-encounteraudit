@@ -11,8 +11,41 @@
 
 <script>
     jq = jQuery;
+    var jsProjects = [];
+    var jsProjectParameters = [];
+
+    <% if (projects) {
+        projects.each { project ->
+            def projectParameters = project.projectParameters
+            if (projectParameters) { %>
+                jsProjectParameters = [];
+                <% projectParameters.each { projectParameter -> %>
+                    jsProjectParameters.push({parameterId:"${ projectParameter.parameter.id}",
+                        parameterName:"${ projectParameter.parameter.name }",
+                        parameterValue:"${ projectParameter.parameterValue }"
+                    });
+             <% }
+            } %>
+            jsProjects.push({projectId:"${ project.id}", projectName:"${ project.name }", projectParameters: jsProjectParameters});
+     <% }
+     } %>
+
     jq(document).ready(function() {
         jq( "#tabs" ).tabs();
+
+        jq.findProject = function(projectId) {
+            var project = null;
+            if ( projectId.length > 0 ) {
+                for (var i=0; i<jsProjects.length; i++) {
+                    var projectItem =  new Object();
+                    projectItem = jsProjects[i];
+                    if (projectItem.projectId == projectId) {
+                        return projectItem;
+                    }
+                }
+            }
+            return project;
+        }
     });
 </script>
 <script>
@@ -23,7 +56,13 @@
             jq( this ).toggleClass("project_select");
             var projectId = jq(this).attr("data-project-id");
             console.log("projectId=" + projectId);
-            jq("#projectName").val(jq(this).attr("data-project-name"));
+            var projectObject = new Object();
+            projectObject = jq.findProject(projectId);
+            if (projectObject != null ) {
+                console.log("projectName=" + projectObject.projectName);
+                jq("#projectName").val(projectObject.projectName);
+            }
+
         })
     })
 </script>
