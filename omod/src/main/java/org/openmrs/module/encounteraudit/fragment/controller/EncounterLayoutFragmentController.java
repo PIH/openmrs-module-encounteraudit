@@ -164,16 +164,22 @@ public class EncounterLayoutFragmentController {
         EncounterAuditProjectParameter locationProjectParameter = new EncounterAuditProjectParameter();
         EncounterAuditParameter locationParameter = service.getParameterByName("location");
         locationProjectParameter.setParameter(locationParameter);
-        locationProjectParameter.setParameterValue(location.getName());
-        locationProjectParameter.setProject(encounterAuditProject);
+        if (location != null) {
+            locationProjectParameter.setParameterValue(location.getName());
+        } else {
+            locationProjectParameter.setParameterValue(locationParameter.getDefaultValue());
+        }
         encounterAuditProject.addProjectParameter(locationProjectParameter);
 
         EncounterAuditProjectParameter encounterTypeProjectParameter = new EncounterAuditProjectParameter();
         EncounterAuditParameter encounterTypeParameter = service.getParameterByName("encounter_type");
         encounterTypeProjectParameter.setParameter(encounterTypeParameter);
-        encounterTypeProjectParameter.setParameterValue(encounterType.getName());
-        encounterTypeProjectParameter.setProject(encounterAuditProject);
-//        encounterAuditProject.addProjectParameter(encounterTypeProjectParameter);
+        if (encounterType != null ) {
+            encounterTypeProjectParameter.setParameterValue(encounterType.getName());
+        } else {
+            encounterTypeProjectParameter.setParameterValue(encounterTypeParameter.getDefaultValue());
+        }
+        encounterAuditProject.addProjectParameter(encounterTypeProjectParameter);
 
         encounterAuditProject = service.saveEncounterAuditProject(encounterAuditProject);
 

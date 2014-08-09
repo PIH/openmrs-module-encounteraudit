@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by pochedls on 30/07/2014.
  */
-public class EncounterAuditProjectParameter  implements Serializable {
+public class EncounterAuditProjectParameter  implements Serializable, Comparable<EncounterAuditProjectParameter> {
 
     private Integer id;
 
@@ -55,5 +55,12 @@ public class EncounterAuditProjectParameter  implements Serializable {
         this.parameterValue = parameterValue;
     }
 
-
+    @Override
+    public int compareTo(EncounterAuditProjectParameter other) {
+        int retValue = 0;
+        if (other !=null ){
+            retValue = getParameter().getParameterId().compareTo(other.getParameter().getId());
+        }
+        return retValue;
+    }
 }
