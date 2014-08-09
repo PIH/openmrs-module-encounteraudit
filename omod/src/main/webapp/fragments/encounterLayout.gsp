@@ -20,7 +20,8 @@
             if (projectParameters) { %>
                 jsProjectParameters = [];
                 <% projectParameters.each { projectParameter -> %>
-                    jsProjectParameters.push({parameterId:"${ projectParameter.parameter.id}",
+                    jsProjectParameters.push({
+                        parameterId:"${ projectParameter.parameter.id}",
                         parameterName:"${ projectParameter.parameter.name }",
                         parameterValue:"${ projectParameter.parameterValue }"
                     });
@@ -37,7 +38,7 @@
             var project = null;
             if ( projectId.length > 0 ) {
                 for (var i=0; i<jsProjects.length; i++) {
-                    var projectItem =  new Object();
+                    var projectItem = new Object();
                     projectItem = jsProjects[i];
                     if (projectItem.projectId == projectId) {
                         return projectItem;
@@ -53,14 +54,26 @@
     jq(document).ready(function() {
         jq("#projects li").click(function() {
             jq(".project_select").removeClass("project_select")
+            jq('select#encounters-filterByLocation-field option').removeAttr("selected");
+            jq('select#filterByEncounterType-field option').removeAttr("selected");
             jq( this ).toggleClass("project_select");
             var projectId = jq(this).attr("data-project-id");
-            console.log("projectId=" + projectId);
+
             var projectObject = new Object();
             projectObject = jq.findProject(projectId);
             if (projectObject != null ) {
-                console.log("projectName=" + projectObject.projectName);
+
                 jq("#projectName").val(projectObject.projectName);
+                var projectParameters = projectObject.projectParameters;
+                for (var i = 0; i < projectParameters.length; i++) {
+                    var projectParameter = new Object();
+                    projectParameter = projectParameters[i];
+                    if (projectParameter.parameterName == 'location') {
+                        jq("#encounters-filterByLocation-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
+                    } else if (projectParameter.parameterName == 'encounter_type') {
+                        jq("#filterByEncounterType-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
+                    }
+                }
             }
 
         })
