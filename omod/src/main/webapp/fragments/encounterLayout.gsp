@@ -152,8 +152,6 @@ jq(document).ready(function() {
     <%=   ui.includeFragment("encounteraudit", "reports") %>
 </div>
 
-
-
 </div>
 
 

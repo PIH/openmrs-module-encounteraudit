@@ -161,12 +161,19 @@ public class EncounterLayoutFragmentController {
         encounterAuditProject.setProjectType(EncounterAuditProject.EncounterAuditProjectType.LQAS);
         encounterAuditProject.setProjectStatus(EncounterAuditProject.EncounterAuditProjectStatus.INCOMPLETE);
 
+        EncounterAuditProjectParameter locationProjectParameter = new EncounterAuditProjectParameter();
         EncounterAuditParameter locationParameter = service.getParameterByName("location");
-        EncounterAuditProjectParameter projectParameter = new EncounterAuditProjectParameter();
-        projectParameter.setParameter(locationParameter);
-        projectParameter.setProject(encounterAuditProject);
-        projectParameter.setParameterValue("Neno District Hospital");
-        encounterAuditProject.addProjectParameter(projectParameter);
+        locationProjectParameter.setParameter(locationParameter);
+        locationProjectParameter.setParameterValue(location.getName());
+        locationProjectParameter.setProject(encounterAuditProject);
+        encounterAuditProject.addProjectParameter(locationProjectParameter);
+
+        EncounterAuditProjectParameter encounterTypeProjectParameter = new EncounterAuditProjectParameter();
+        EncounterAuditParameter encounterTypeParameter = service.getParameterByName("encounter_type");
+        encounterTypeProjectParameter.setParameter(encounterTypeParameter);
+        encounterTypeProjectParameter.setParameterValue(encounterType.getName());
+        encounterTypeProjectParameter.setProject(encounterAuditProject);
+//        encounterAuditProject.addProjectParameter(encounterTypeProjectParameter);
 
         encounterAuditProject = service.saveEncounterAuditProject(encounterAuditProject);
 
