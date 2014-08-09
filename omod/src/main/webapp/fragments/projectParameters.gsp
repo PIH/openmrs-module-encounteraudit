@@ -9,7 +9,7 @@
 <br>
 
 <table id="projectParametersTable" border="0">
-    <input id="projectId" type="hidden">
+    <input id="projectId" name="projectId" type="hidden">
     <tr>
         <td>Project Name</td>
         <td><input id="projectName"> </td>
@@ -17,7 +17,7 @@
     <tr>
         <td>Description</td>
         <td>
-            <textarea rows="2" cols="30"></textarea>
+            <textarea id="projectDescription" name="projectDescription" rows="2" cols="30"></textarea>
         </td>
     </tr>
     <tr>

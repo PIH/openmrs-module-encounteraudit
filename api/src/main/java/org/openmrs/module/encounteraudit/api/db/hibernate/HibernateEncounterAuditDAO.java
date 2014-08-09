@@ -84,6 +84,11 @@ public class HibernateEncounterAuditDAO implements EncounterAuditDAO {
     }
 
     @Override
+    public EncounterAuditProject getEncounterAuditProjectById(Integer projectId) throws DAOException {
+        return (EncounterAuditProject) sessionFactory.getCurrentSession().get(EncounterAuditProject.class, projectId);
+    }
+
+    @Override
     public List<Encounter> getAuditEncounters(Date fromDate, Date toDate, int sampleSize, Location location, EncounterType encounterType, String creatorId) {
 
         if (sampleSize < 1) {

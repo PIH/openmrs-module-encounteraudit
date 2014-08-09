@@ -43,4 +43,5 @@ public interface EncounterAuditDAO {
 
     public EncounterAuditParameter getParameterByName(String name) throws DAOException;
 
+    public EncounterAuditProject getEncounterAuditProjectById(Integer projectId) throws DAOException;
 }

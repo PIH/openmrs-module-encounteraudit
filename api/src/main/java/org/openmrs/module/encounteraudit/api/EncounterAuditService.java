@@ -54,4 +54,5 @@ public interface EncounterAuditService extends OpenmrsService {
 
     public EncounterAuditParameter getParameterByName(String name) throws APIException;
 
+    public EncounterAuditProject getAuditProjectById(Integer projectId);
 }

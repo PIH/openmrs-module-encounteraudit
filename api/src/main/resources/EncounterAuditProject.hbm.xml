@@ -11,6 +11,7 @@
         </id>
 
         <property name="name" type="java.lang.String" column="name" length="45" not-null="true" />
+        <property name="description" type="java.lang.String" column="description" length="1024" not-null="false" />
 
         <property name="projectType" column="project_type" length="45" not-null="true">
             <type name="org.openmrs.util.HibernateEnumType">

@@ -127,6 +127,7 @@ public class EncounterLayoutFragmentController {
     public List<SimpleObject> getAuditEncounters(
                                             @RequestParam(value="projectId", required = false) String projectId,
                                             @RequestParam(value="projectName", required = false) String name,
+                                            @RequestParam(value="projectDescription", required = false) String projectDescription,
                                             @RequestParam(value="start", required=false) Date startDate,
                                             @RequestParam(value="end", required=false) Date endDate,
                                             @RequestParam(value="location", required=false) Location location,
@@ -151,12 +152,19 @@ public class EncounterLayoutFragmentController {
             encounterTypes = (new ArrayList<EncounterType>(Collections.singletonList(encounterType)));
         }
 
-        EncounterAuditProject encounterAuditProject = new EncounterAuditProject();
+        EncounterAuditProject encounterAuditProject = null;
         if (StringUtils.isNotBlank(projectId)) {
-            encounterAuditProject.setId(new Integer(projectId));
+            encounterAuditProject = service.getAuditProjectById(new Integer(projectId));
         }
+        if (encounterAuditProject == null) {
+            encounterAuditProject = new EncounterAuditProject();
+        }
+
         if (StringUtils.isNotBlank(name)) {
             encounterAuditProject.setName(name);
+        }
+        if (StringUtils.isNotBlank(projectDescription)) {
+            encounterAuditProject.setDescription(projectDescription);
         }
         encounterAuditProject.setProjectType(EncounterAuditProject.EncounterAuditProjectType.LQAS);
         encounterAuditProject.setProjectStatus(EncounterAuditProject.EncounterAuditProjectStatus.INCOMPLETE);

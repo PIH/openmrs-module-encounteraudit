@@ -27,7 +27,11 @@
                     });
              <% }
             } %>
-            jsProjects.push({projectId:"${ project.id}", projectName:"${ project.name }", projectParameters: jsProjectParameters});
+            jsProjects.push({
+                projectId:"${ project.id}",
+                projectName:"${ project.name }",
+                projectDescription:"${ project.description }",
+                projectParameters: jsProjectParameters});
      <% }
      } %>
 
@@ -62,8 +66,11 @@
             var projectObject = new Object();
             projectObject = jq.findProject(projectId);
             if (projectObject != null ) {
-
                 jq("#projectName").val(projectObject.projectName);
+                jq("#projectId").val(projectObject.projectId);
+                if (projectObject.projectDescription ) {
+                    jq("#projectDescription").val(projectObject.projectDescription);
+                }
                 var projectParameters = projectObject.projectParameters;
                 for (var i = 0; i < projectParameters.length; i++) {
                     var projectParameter = new Object();
@@ -95,9 +102,10 @@ jq(function() {
         var encounterType = jq("#filterByEncounterType-field").val();
         var numofrecords = jq("#numofrecords").val();
         var creatorId = jq("#users-filterByUser-field").val();
-        console.log("sampling records");
+
         var projectId = jq("#projectId").val();
         var projectName = jq("#projectName").val();
+        var projectDescription = jq("#projectDescription").val();
 
         jq.getJSON('${ ui.actionLink("encounteraudit","encounterLayout","getAuditEncounters") }',
                                     {
@@ -109,6 +117,7 @@ jq(function() {
                                         'creatorId' :creatorId,
                                         'projectId' :projectId,
                                         'projectName' :projectName,
+                                        'projectDescription' :projectDescription,
                                         'properties': [ <%= props.collect { "'${it}'" }.join(",") %> ]
 })
 .success(function(data) {

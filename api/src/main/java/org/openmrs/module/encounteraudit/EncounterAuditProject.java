@@ -25,6 +25,8 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
 
     private String name;
 
+    private String description;
+
     private EncounterAuditProjectType projectType;
 
     private EncounterAuditProjectStatus projectStatus;
@@ -48,6 +50,14 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public EncounterAuditProjectType getProjectType() {

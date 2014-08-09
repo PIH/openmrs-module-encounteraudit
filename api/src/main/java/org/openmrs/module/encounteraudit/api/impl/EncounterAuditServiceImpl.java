@@ -81,4 +81,8 @@ public class EncounterAuditServiceImpl extends BaseOpenmrsService implements Enc
         return dao.getParameterByName(name);
     }
 
+    @Override
+    public EncounterAuditProject getAuditProjectById(Integer projectId) {
+        return dao.getEncounterAuditProjectById(projectId);
+    }
 }
