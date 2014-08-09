@@ -78,7 +78,7 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
     }
 
     public void addProjectParameter(EncounterAuditProjectParameter projectParameter) {
-        if (projectParameter != null ) {
+        if (projectParameter != null ) {
             projectParameter.setProject(this);
             if (projectParameters == null ) {
                 projectParameters = new TreeSet<EncounterAuditProjectParameter>();
