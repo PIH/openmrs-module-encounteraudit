@@ -152,6 +152,8 @@ jq(document).ready(function() {
     <%=   ui.includeFragment("encounteraudit", "reports") %>
 </div>
 
+    <%= ui.format(projects[0].projectParameters.parameterValue) %>
+
 </div>
 
 
