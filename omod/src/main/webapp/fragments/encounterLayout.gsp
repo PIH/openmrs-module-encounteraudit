@@ -144,6 +144,7 @@ jq(function() {
 
         var projectId = jq("#projectId").val();
         var projectName = jq("#projectName").val();
+        jq("#pname").text(projectName);
         var projectDescription = jq("#projectDescription").val();
 
         jq.getJSON('${ ui.actionLink("encounteraudit","encounterLayout","getAuditEncounters") }',
@@ -242,7 +243,7 @@ jq(document).ready(function() {
 </div>
 
     <div id="tabs-2">
-        <%=   ui.includeFragment("encounteraudit", "encounterTable", [id: config.id]) %>
+        <%=   ui.includeFragment("encounteraudit", "encounterTable", [id: config.id, projects: projects]) %>
     </div>
 
 <div id="tabs-3">

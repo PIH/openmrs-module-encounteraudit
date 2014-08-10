@@ -14,6 +14,9 @@
     padding: 5px;
     margin: 5px
 }
+table#noborder td{
+    border:none !important;
+}
 </style>
 
 <br><br>
