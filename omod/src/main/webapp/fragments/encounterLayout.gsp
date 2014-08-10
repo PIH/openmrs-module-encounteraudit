@@ -111,7 +111,9 @@
                     } else if (projectParameter.parameterName == 'location') {
                         jq("#encounters-filterByLocation-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
                     } else if (projectParameter.parameterName == 'encounter_type') {
-                        jq("#filterByEncounterType-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
+                        jq("#filterByEncounterType-field option").filter(function() {
+                            return jq(this).text() == projectParameter.parameterValue;
+                        }).attr("selected", "selected");
                     } else if (projectParameter.parameterName == 'creator') {
                         jq("#users-filterByUser-field option[value=\"" + projectParameter.parameterValue + "\"]").attr("selected", "selected");
                     }
