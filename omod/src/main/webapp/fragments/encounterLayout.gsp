@@ -40,7 +40,7 @@
 
         jq.findProject = function(projectId) {
             var project = null;
-            if ( projectId.length > 0 ) {
+            if ( projectId != null && projectId != 'undefined' && projectId.length > 0 ) {
                 for (var i=0; i<jsProjects.length; i++) {
                     var projectItem = new Object();
                     projectItem = jsProjects[i];
