@@ -51,6 +51,16 @@
             }
             return project;
         }
+
+        jq.parseDateFromString = function(dateString) {
+            var d = new Date(dateString);
+            var day = d.getDate();
+            var month = parseInt(d.getMonth(), 10) + 1;
+            var year = d.getFullYear();
+            var displayDate = day + "-" + month + "-" + year;
+            return displayDate;
+
+        }
     });
 </script>
 <script>
@@ -58,24 +68,33 @@
     jq(document).ready(function() {
         jq("#projects li").click(function() {
             jq(".project_select").removeClass("project_select")
+
+            jq("#projectName").val('');
+            jq("#projectDescription").val('');
+            jq("#startDateField-display").val('');
+            jq("#endDateField-display").val('');
             jq('select#encounters-filterByLocation-field option').removeAttr("selected");
             jq('select#filterByEncounterType-field option').removeAttr("selected");
             jq( this ).toggleClass("project_select");
-            var projectId = jq(this).attr("data-project-id");
+            var projectId = jq(this).attr("data-project-id");   
 
             var projectObject = new Object();
             projectObject = jq.findProject(projectId);
             if (projectObject != null ) {
                 jq("#projectName").val(projectObject.projectName);
                 jq("#projectId").val(projectObject.projectId);
-                if (projectObject.projectDescription ) {
+                if (projectObject.projectDescription != 'null' &&  projectObject.projectDescription.length > 0) {
                     jq("#projectDescription").val(projectObject.projectDescription);
                 }
                 var projectParameters = projectObject.projectParameters;
                 for (var i = 0; i < projectParameters.length; i++) {
                     var projectParameter = new Object();
                     projectParameter = projectParameters[i];
-                    if (projectParameter.parameterName == 'location') {
+                    if (projectParameter.parameterName == 'start_date') {
+                        jq("#startDateField-display").val(jq.parseDateFromString(projectParameter.parameterValue));
+                    } else if (projectParameter.parameterName == 'end_date') {
+                        jq("#endDateField-display").val(jq.parseDateFromString(projectParameter.parameterValue));
+                    } else if (projectParameter.parameterName == 'location') {
                         jq("#encounters-filterByLocation-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
                     } else if (projectParameter.parameterName == 'encounter_type') {
                         jq("#filterByEncounterType-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");

@@ -169,25 +169,34 @@ public class EncounterLayoutFragmentController {
         encounterAuditProject.setProjectType(EncounterAuditProject.EncounterAuditProjectType.LQAS);
         encounterAuditProject.setProjectStatus(EncounterAuditProject.EncounterAuditProjectStatus.INCOMPLETE);
 
-        EncounterAuditProjectParameter locationProjectParameter = new EncounterAuditProjectParameter();
-        EncounterAuditParameter locationParameter = service.getParameterByName("location");
-        locationProjectParameter.setParameter(locationParameter);
-        if (location != null) {
-            locationProjectParameter.setParameterValue(location.getName());
-        } else {
-            locationProjectParameter.setParameterValue(locationParameter.getDefaultValue());
-        }
-        encounterAuditProject.addProjectParameter(locationProjectParameter);
+        EncounterAuditProjectParameter startDateProjectParameter = new EncounterAuditProjectParameter();
+        EncounterAuditParameter startDateParameter = service.getParameterByName("start_date");
+        startDateProjectParameter.setParameter(startDateParameter);
+        startDateProjectParameter.setParameterValue(startDate.toString());
+        encounterAuditProject.addProjectParameter(startDateProjectParameter);
 
-        EncounterAuditProjectParameter encounterTypeProjectParameter = new EncounterAuditProjectParameter();
-        EncounterAuditParameter encounterTypeParameter = service.getParameterByName("encounter_type");
-        encounterTypeProjectParameter.setParameter(encounterTypeParameter);
-        if (encounterType != null ) {
-            encounterTypeProjectParameter.setParameterValue(encounterType.getName());
-        } else {
-            encounterTypeProjectParameter.setParameterValue(encounterTypeParameter.getDefaultValue());
+        EncounterAuditProjectParameter endDateProjectParameter = new EncounterAuditProjectParameter();
+        EncounterAuditParameter endDateParameter = service.getParameterByName("end_date");
+        endDateProjectParameter.setParameter(endDateParameter);
+        endDateProjectParameter.setParameterValue(endDate.toString());
+        encounterAuditProject.addProjectParameter(endDateProjectParameter);
+
+        if (location != null) {
+            EncounterAuditProjectParameter locationProjectParameter = new EncounterAuditProjectParameter();
+            EncounterAuditParameter locationParameter = service.getParameterByName("location");
+            locationProjectParameter.setParameter(locationParameter);
+            locationProjectParameter.setParameterValue(location.getName());
+            encounterAuditProject.addProjectParameter(locationProjectParameter);
         }
-        encounterAuditProject.addProjectParameter(encounterTypeProjectParameter);
+
+        if (encounterType != null ) {
+            EncounterAuditProjectParameter encounterTypeProjectParameter = new EncounterAuditProjectParameter();
+            EncounterAuditParameter encounterTypeParameter = service.getParameterByName("encounter_type");
+            encounterTypeProjectParameter.setParameter(encounterTypeParameter);
+            encounterTypeProjectParameter.setParameterValue(encounterType.getName());
+            encounterAuditProject.addProjectParameter(encounterTypeProjectParameter);
+        }
+
 
         encounterAuditProject = service.saveEncounterAuditProject(encounterAuditProject);
 

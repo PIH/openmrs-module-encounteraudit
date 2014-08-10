@@ -59,7 +59,7 @@ public class EncounterAuditProjectParameter  implements Serializable, Comparable
     public int compareTo(EncounterAuditProjectParameter other) {
         int retValue = 0;
         if (other !=null ){
-            retValue = getParameter().getParameterId().compareTo(other.getParameter().getId());
+            retValue = getParameter().getParameterId().compareTo(other.getParameter().getParameterId());
         }
         return retValue;
     }
