@@ -75,6 +75,8 @@
             jq("#endDateField-display").val('');
             jq('select#encounters-filterByLocation-field option').removeAttr("selected");
             jq('select#filterByEncounterType-field option').removeAttr("selected");
+            jq('select#users-filterByUser-field option').removeAttr("selected");
+            jq("#numofrecords").val('');
             jq( this ).toggleClass("project_select");
             var projectId = jq(this).attr("data-project-id");   
 
@@ -91,17 +93,33 @@
                     var projectParameter = new Object();
                     projectParameter = projectParameters[i];
                     if (projectParameter.parameterName == 'start_date') {
-                        jq("#startDateField-display").val(jq.parseDateFromString(projectParameter.parameterValue));
+                        parsedValue = projectParameter.parameterValue.substr(4, 6) + ' ' + projectParameter.parameterValue.substr(24, 28);
+                        parsedDate = new Date(parsedValue);
+                        day = parsedDate.getDate();
+                        month = parsedDate.getMonth() + 1;
+                        year = parsedDate.getFullYear().toString()
+                        dateString = day.toString() + '-' + month.toString() + '-' + year.toString();;
+                        jq("#startDateField-display").val(dateString);
                     } else if (projectParameter.parameterName == 'end_date') {
-                        jq("#endDateField-display").val(jq.parseDateFromString(projectParameter.parameterValue));
+                        parsedValue = projectParameter.parameterValue.substr(4, 6) + ' ' + projectParameter.parameterValue.substr(24, 28);
+                        parsedDate = new Date(parsedValue);
+                        day = parsedDate.getDate();
+                        month = parsedDate.getMonth() + 1;
+                        year = parsedDate.getFullYear().toString()
+                        dateString = day.toString() + '-' + month.toString() + '-' + year.toString();;
+                        jq("#endDateField-display").val(dateString);
                     } else if (projectParameter.parameterName == 'location') {
                         jq("#encounters-filterByLocation-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
                     } else if (projectParameter.parameterName == 'encounter_type') {
                         jq("#filterByEncounterType-field option:contains(" + projectParameter.parameterValue + ")").attr("selected", "selected");
+                    } else if (projectParameter.parameterName == 'creator') {
+                        jq("#users-filterByUser-field option[value=\"" + projectParameter.parameterValue + "\"]").attr("selected", "selected");
+                    }
+                    else if (projectParameter.parameterName == 'number_of_records') {
+                        jq("#numofrecords").val(projectParameter.parameterValue);
                     }
                 }
             }
-
         })
     })
 </script>
@@ -147,15 +165,13 @@ for (index in data) {
     item = data[index];
 
     var row = jq(document.createElement('tr'));
-
-    //var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&encounterId='  + item.encounterId;
     var encounterFormUrl = 'http://localhost:8080/openmrs/module/htmlformentry/htmlFormEntry.form?inPopup=true&personId=' + item.patientId + '&formId=' + '65' + '&returnUrl=/openmrs/module/htmlformflowsheet/testChart.list%3FselectTab%3D0&closeAfterSubmission=closeEncounterChartPopup';
     //console.log(encounterFormUrl)
     row.click(function() {
     jq("#encounterDialog").attr('src', encounterFormUrl);
     jq("#encounterFormDiv").dialog({
     width: 1200,
-    height: 600,
+    height: 300,
     modal: true,
     close: function () {
     jq("#encounterDialog").attr('src', "about:blank");
@@ -174,30 +190,29 @@ tbody.append(row);
 // Table sorter - function
 jq(document).ready(function() {
     jq('#${ id }').tablesorter();
-                                            // jq( "#${ id } th:nth-child(1)" ).text( "Encounter ID" );
-                                            // jq( "#${ id } th:nth-child(2)" ).text( "Patient ID" );
-                                            jq( "#${ id } th:nth-child(1)" ).text( "Encounter Date" );
-                                            jq( "#${ id } th:nth-child(2)" ).text( "Location" );
-                                            jq( "#${ id } th:nth-child(3)" ).text( "Encounter Type" );
-                                            jq( "#${ id } th:nth-child(4)" ).text( "Creator" );
-                                        });
-                                        // Table sorter - label for css
-                                        jq(document).ready(function() {
-                                            jq('#${ id }').addClass('tablesorter');
-                                        });
-                                        jq(document).ready(function() {
-                                            jq('#${ id } tr').mouseover(function () {
-                                                jq(this).addClass('row_highlight');
-                                            }).mouseout(function () {
-                                                        jq(this).removeClass('row_highlight');
-                                                    });
-                                        })
-                                    })
-                                    .error(function(xhr, status, err) {
-                                        alert('AJAX error ' + err);
-                                    })
-                        });
+    jq( "#${ id } th:nth-child(1)" ).text( "Encounter Date" );
+    jq( "#${ id } th:nth-child(2)" ).text( "Location" );
+    jq( "#${ id } th:nth-child(3)" ).text( "Encounter Type" );
+    jq( "#${ id } th:nth-child(4)" ).text( "Creator" );
+});
+                    // Table sorter - label for css
+                    jq(document).ready(function() {
+                        jq('#${ id }').addClass('tablesorter');
                     });
+                    jq(document).ready(function() {
+                        jq('#${ id } tr').mouseover(function () {
+                            jq(this).addClass('row_highlight');
+                        }).mouseout(function () {
+                                    jq(this).removeClass('row_highlight');
+                                });
+                    })
+                })
+                .error(function(xhr, status, err) {
+                    alert('AJAX error ' + err);
+                })
+    });
+});
+
 </script>
 
 
@@ -231,8 +246,6 @@ jq(document).ready(function() {
 <div id="tabs-3">
     <%=   ui.includeFragment("encounteraudit", "reports") %>
 </div>
-
-    <%= ui.format(projects[0].projectParameters.parameterValue) %>
 
 </div>
 

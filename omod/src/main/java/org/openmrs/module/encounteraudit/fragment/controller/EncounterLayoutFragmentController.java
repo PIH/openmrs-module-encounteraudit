@@ -197,6 +197,22 @@ public class EncounterLayoutFragmentController {
             encounterAuditProject.addProjectParameter(encounterTypeProjectParameter);
         }
 
+        if (creatorId != null ) {
+            EncounterAuditProjectParameter creatorProjectParameter = new EncounterAuditProjectParameter();
+            EncounterAuditParameter encounterTypeParameter = service.getParameterByName("creator");
+            creatorProjectParameter.setParameter(encounterTypeParameter);
+            creatorProjectParameter.setParameterValue(creatorId);
+            encounterAuditProject.addProjectParameter(creatorProjectParameter);
+        }
+
+        if (numOfRecords != null ) {
+            EncounterAuditProjectParameter numRecordsProjectParameter = new EncounterAuditProjectParameter();
+            EncounterAuditParameter encounterTypeParameter = service.getParameterByName("number_of_records");
+            numRecordsProjectParameter.setParameter(encounterTypeParameter);
+            numRecordsProjectParameter.setParameterValue(numOfRecords.toString());
+            encounterAuditProject.addProjectParameter(numRecordsProjectParameter);
+        }
+
 
         encounterAuditProject = service.saveEncounterAuditProject(encounterAuditProject);
 
