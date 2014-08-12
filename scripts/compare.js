@@ -16,9 +16,9 @@ $(document).ready(function() {
         dataInitial.list[dataInitial.list.length] = element;
     }
         // individual obs
-    w5 = new formObsInitial('w5','Encounter Date','01/06/2014',[],'value_datetime');
-    w8 = new formObsInitial('w8','Height',160,[],'value_numeric');
-    w10 = new formObsInitial('w10','Weight',59,[],'value_numeric');
+    w5 = new formObsInitial('w5','Encounter Date','',[],'value_datetime');
+    w8 = new formObsInitial('w8','Height',178,[],'value_numeric');
+    w10 = new formObsInitial('w10','Weight',77,[],'value_numeric');
     w12 = new formObsInitial('w12','Regimen',8164,'5A: TDF + 3TC + EFV','value_coded');
     w14 = new formObsInitial('w14','Side Effects',1066,'No','value_coded');
     w26 = new formObsInitial('w26','TB Status',7454,'None','value_coded');
@@ -26,10 +26,10 @@ $(document).ready(function() {
     w30 = new formObsInitial('w30','Missed Doses',0,[],'value_numeric');
     w32 = new formObsInitial('w32','ARVs Given',90,[],'value_numeric');
     w34 = new formObsInitial('w34','Guardian Present',false,[],'value_boolean');
-    w36 = new formObsInitial('w36','CPT Given',180,[],'value_numeric');
+    w36 = new formObsInitial('w36','CPT Given',90,[],'value_numeric');
     w38 = new formObsInitial('w38','Depo Provera Given',1065,[],'value_coded');
     w40 = new formObsInitial('w40','Condoms Given',[],[],'value_numeric');
-    w42 = new formObsInitial('w42','Appointment Date','01/09/2014',[],'value_datetime');
+    w42 = new formObsInitial('w42','Appointment Date','',[],'value_datetime');
 
     // call function to clear fields 
     clear_form_elements('#htmlform');
@@ -80,7 +80,13 @@ $(document).ready(function() {
                         // obs ids match
                         if (dataInitial[dataInitial.list[i]].value != auditdata[j].value) {
                             // values do not match
+                        if (dataInitial[dataInitial.list[i]].value != auditdata[j].value) {
+                            // values do not match
                             add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '. ';
+                            $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
+                        } else {
+                            $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
+                        }
                             $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
                         } else {
                             $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
@@ -91,7 +97,13 @@ $(document).ready(function() {
                     if (dataInitial.list[i] == auditdata[j].name) {
                         if (+dataInitial[dataInitial.list[i]].value != +auditdata[j].value) {
                             $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
-                        add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '. ';
+                        if (dataInitial[dataInitial.list[i]].value != auditdata[j].value) {
+                            // values do not match
+                            add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '. ';
+                            $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
+                        } else {
+                            $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
+                        }
                         } else {
                             $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
                         }
