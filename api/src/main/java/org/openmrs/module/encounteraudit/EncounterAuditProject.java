@@ -4,9 +4,7 @@ import org.openmrs.BaseOpenmrsData;
 import org.openmrs.util.OpenmrsUtil;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by cosmin on 6/18/14.
@@ -93,6 +91,13 @@ public class EncounterAuditProject extends BaseOpenmrsData implements Serializab
             if (projectParameters == null ) {
                 projectParameters = new TreeSet<EncounterAuditProjectParameter>();
             }
+            List<EncounterAuditProjectParameter> oldParameters = new ArrayList<EncounterAuditProjectParameter>();
+            for (EncounterAuditProjectParameter parameter : projectParameters) {
+                if (parameter !=null && parameter.equals(projectParameter)){
+                    oldParameters.add(parameter);
+                }
+            }
+            projectParameters.removeAll(oldParameters);
             projectParameters.add(projectParameter);
         }
     }

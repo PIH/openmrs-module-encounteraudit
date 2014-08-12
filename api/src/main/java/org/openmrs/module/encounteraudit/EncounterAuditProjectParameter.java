@@ -56,10 +56,26 @@ public class EncounterAuditProjectParameter  implements Serializable, Comparable
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof EncounterAuditProjectParameter) ) {
+            return false;
+        }
+        EncounterAuditProjectParameter otherParameter = (EncounterAuditProjectParameter) other;
+        if (this.getParameter().getParameterId().compareTo(otherParameter.getParameter().getParameterId()) == 0 &&
+                this.getProject().getId().compareTo(otherParameter.getProject().getId()) == 0 ) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public int compareTo(EncounterAuditProjectParameter other) {
-        int retValue = 0;
+        int retValue = 1;
         if (other !=null ){
-            retValue = getParameter().getParameterId().compareTo(other.getParameter().getParameterId());
+            if (this.getParameter().getParameterId().compareTo(other.getParameter().getParameterId()) == 0 &&
+            this.getProject().getId().compareTo(other.getProject().getId()) == 0 ) {
+                retValue = 0;
+            }
         }
         return retValue;
     }
