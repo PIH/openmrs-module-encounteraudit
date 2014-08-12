@@ -41,11 +41,11 @@ $(document).ready(function() {
     	// parse audit data
     	auditdata = JSON.parse(JSON.stringify(jQuery('#htmlform').serializeArray()));
         compare_obs_array(dataInitial,auditdata)
-        $( '#dialog' ).dialog('open');
         if (add.length > 0) {
-           $('#dialog p').remove(); // remove any text and repopulate
-           $('#dialog ul').remove(); // remove any text and repopulate
-           $('#dialog').append('<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span> The following values are different:</p><p><ul>' + add + '</ul></p>')
+            $('#dialog p').remove(); // remove any text and repopulate
+            $('#dialog ul').remove(); // remove any text and repopulate
+            $('#dialog').append('<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span> The following values are different:</p><p><ul>' + add + '</ul></p>')
+            $( '#dialog' ).dialog('open');
         };
     })
 
@@ -98,9 +98,9 @@ $(document).ready(function() {
                         if (+dataInitial[dataInitial.list[i]].value != +auditdata[j].value) {
                             $('#' + dataInitial.list[i]).css({'background-color' : 'red', 'opacity' : '0.5'});
                             if (dataInitial[dataInitial.list[i]].ans_concept_string.length == 0) {
-                                add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '. ';
+                                add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].value + '.</li> ';
                             } else {
-                                add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].ans_concept_string + '. ';
+                                add = add += '<li> <b>' + dataInitial[dataInitial.list[i]].name + '</b> : ' + dataInitial[dataInitial.list[i]].ans_concept_string + '.</li> ';
                             }
                         } else {
                             $('#' + dataInitial.list[i]).css({'background-color' : '#00FF33', 'opacity' : '0.5'});
