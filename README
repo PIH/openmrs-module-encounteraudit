@@ -1,0 +1,41 @@
+Encounter Audit Module
+=========
+
+### About
+
+Encounter Audit Module is an open source module for OpenMRS that is meant to assess the quality of encounters entered into OpenMRS. The module relies on having a copy of the encounter that can be re-entered into the EMR. The module will then store the original record and the new audit record for comparison. This comparison is then used to determine the data quality of various encounters in OpenMRS. 
+
+### Module Status
+
+This module is still be developed for release, but here is a summary of the current status. 
+
+#### Completed:
+
+* Ability to sample encounters by parameters including creator, date range, encounter type, and location
+* Functionality to specify the number of encounters to audit
+* Saving projects by project name, description, and recording project parameters
+* Organization of audit encounters into a sortable table
+* Selecting an audit record brings up an htmlform specific to the type of encounter
+* Ability to re-enter the encounter (based off original paper record)
+* Built in comparison of existing encounter and the audit encounter
+	* Differences highlighted and brought to the user's attention
+	* User can view differences and either cancel the audit, update the audit or submit the audit
+
+#### Future: 
+
+* Capability to save and recall previously sampled encounters (from saved project information)
+* Capability to store the original encounter observations and the audited encounter observations
+* Capability to classify differences (e.g. missing, value mismatch, not on paper, etc.)
+* Classifying audit project statuses
+* Capability to add/delete encounters from projects
+* Ability to generate projects based on project type
+* Basic reporting capabilities
+
+### Repository 
+
+The module repository is stored at: https://github.com/PIH/openmrs-module-encounteraudit
+
+### Wiki
+
+The module wiki is located at: https://wiki.openmrs.org/display/projects/Encounter+Audit+Module
+

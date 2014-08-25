@@ -5,9 +5,8 @@
     ui.includeJavascript("uicommons", "jquery-ui-1.9.2.custom.min.js");
     ui.includeCss("uicommons", "styleguide/jquery-ui-1.9.2.custom.min.css")
     ui.includeJavascript("encounteraudit", "jquery.tablesorter.min.js");
-    ui.includeCss("encounteraudit", "tablesorter/style.css")
-
-    sessionContext.requireAuthentication()
+    ui.includeCss("encounteraudit", "tablesorter/style.css");
+    sessionContext.requireAuthentication();
 %>
 
 <style type="text/css">
