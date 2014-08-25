@@ -25,11 +25,19 @@ This module is still be developed for release, but here is a summary of the curr
 
 * Capability to save and recall previously sampled encounters (from saved project information)
 * Capability to store the original encounter observations and the audited encounter observations
+* Ability to correct original observations/encounters based on audit information
 * Capability to classify differences (e.g. missing, value mismatch, not on paper, etc.)
-* Classifying audit project statuses
+* Classifying and flagging audit project and encounter statuses
+	* Ability to automatically sample based on project type (e.g. to select an appropriate random population for a given confidence interval or to produce a lot quality assurance assessment)
 * Capability to add/delete encounters from projects
 * Ability to generate projects based on project type
 * Basic reporting capabilities
+	* Quality of data by user
+	* Types of errors (e.g. user left record blank, user filled in data missing from paper record, user entered in a value with insufficient precision, paper record was difficult to read or changed, impossible to represent accurately in EMR, etc.)
+	* Quality of data based on location
+	* Quality of data for a user defined project, program, or encounter type
+	* Quality of data based on observation
+	* Statistical calculations for confidence intervals, sensitivity, LQAS, etc. 
 
 ### Repository 
 
